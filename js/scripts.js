@@ -42,10 +42,10 @@ function Player(playerName) {
 function CardBank() {
   this.cards = [];
 }
-CardBank.prototype.emptyBank() = function() {
+CardBank.prototype.emptyBank = function() {
   this.cards = [];
 }
-CardBank.prototype.setStandardBank() = function() {
+CardBank.prototype.setStandardBank = function() {
 
 }
 
