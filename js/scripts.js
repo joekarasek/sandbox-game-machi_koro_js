@@ -16,7 +16,14 @@ function Card(cardKey, cardName, cardColor, cardPayout, cardType) {
 // Dice Constructor
 //===================
 function Dice() {
-
+  this.dieOne = 1;
+  this.dieTwo = 1;
+}
+Dice.prototype.roll = function() {
+  this.dieOne = Math.floor((Math.random() * 6) + 1);
+  this.dieTwo = Math.floor((Math.random() * 6) + 1);
+  this.dieOneImgAddress = "img/" + this.dieOne + ".png";
+  this.dieTwoImgAddress = "img/" + this.dieTwo + ".png";
 }
 
 
