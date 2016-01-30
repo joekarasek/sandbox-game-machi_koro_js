@@ -46,7 +46,11 @@ CardBank.prototype.emptyBank = function() {
   this.cards = [];
 }
 CardBank.prototype.setStandardBank = function() {
-
+  var wheatFields = 4;
+  do {
+    this.cards.push(new Card([1], "Wheat Field", "blue", 1, "wheat"));
+    wheatFields--;
+  } while(wheatFields>0);
 }
 
 // Game Constructor

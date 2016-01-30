@@ -30,6 +30,8 @@ describe('Dice', function() {
   it('.roll() method assigns two new integer values to dieOne and dieTwo properties', function() {
     var testDice = new Dice();
     testDice.roll();
+    var testGame = new Game();
+    testGame.cardBank.setStandardBank();
     expect(testDice.dieOne % 1).to.equal(0);
     expect(testDice.dieTwo % 1).to.equal(0);
     expect(testDice.dieOne > 0 && testDice.dieOne < 7).to.equal(true);
