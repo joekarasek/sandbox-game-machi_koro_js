@@ -17,4 +17,7 @@ function Card(cardKey, cardName, cardColor, cardPayout, cardType) {
 //===================
 function Player(playerName) {
   this.playerName = playerName;
+  this.cardStack = [];
+  this.purse = 3;
+  this.monuments = [false,false,false,false];
 }
