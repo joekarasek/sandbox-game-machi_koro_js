@@ -8,3 +8,9 @@ describe('Card', function() {
     expect(testCard.cardType).to.equal("wheat");
   });
 });
+describe('Player', function() {
+  it('creates a Player with the correct playerName', function() {
+    var testPlayer = new Player("Michaela");
+    expect(testPlayer.playerName).to.equal("Michaela");
+  });s
+});
