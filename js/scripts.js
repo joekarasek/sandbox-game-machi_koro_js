@@ -39,3 +39,20 @@ function Player(playerName) {
 
 // CardBank Constructor
 //=====================
+function CardBank() {
+  this.cards = [];
+}
+CardBank.prototype.emptyBank() = function() {
+  this.cards = [];
+}
+CardBank.prototype.setStandardBank() = function() {
+
+}
+
+// Game Constructor
+//=====================
+function Game() {
+  // Will contain players, cardBank, activePlayerIndex,
+  this.cardBank = new CardBank();
+  this.cardBank.setStandardBank();
+}
