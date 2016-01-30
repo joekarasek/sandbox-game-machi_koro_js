@@ -12,6 +12,7 @@ describe('Player', function() {
   it('creates a Player with the correct playerName', function() {
     var testPlayer = new Player("Michaela");
     expect(testPlayer.playerName).to.equal("Michaela");
+    expect(testPlayer.purse).to.equal(3);
     expect(testPlayer.cardStack).to.eql([]);
     expect(testPlayer.monuments).to.eql([false,false,false,false]);
   });

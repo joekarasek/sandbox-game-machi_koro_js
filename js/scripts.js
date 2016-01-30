@@ -13,6 +13,13 @@ function Card(cardKey, cardName, cardColor, cardPayout, cardType) {
 }
 
 
+// Dice Constructor
+//===================
+function Dice() {
+
+}
+
+
 // Player Constructor
 //===================
 function Player(playerName) {
@@ -21,3 +28,7 @@ function Player(playerName) {
   this.purse = 3;
   this.monuments = [false,false,false,false];
 }
+
+
+// CardBank Constructor
+//=====================

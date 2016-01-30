@@ -1,4 +1,7 @@
-# _{Application Name}_
+# _Machi Koro_
+
+# This version is far from complete. Come back Later please!!
+
 
 #### _{Brief description of application}, {Date of current version}_
 
