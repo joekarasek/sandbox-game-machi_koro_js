@@ -36,3 +36,15 @@ describe('Dice', function() {
     expect(testDice.dieTwo > 0 && testDice.dieTwo < 7).to.equal(true);
   });
 });
+describe('CardBank', function() {
+  it('creates an empty cardBank', function() {
+    var testCardBank = new CardBank();
+    expect(testCardBank.cards).to.eql([]);
+  });
+  it('has a method to fill the cardBank with the standard card set', function() {
+    var testCardBank = new CardBank();
+    testCardBank.setStandardBank();
+    console.log(testCardBank);
+    // expect(testCardBank.cards).to.eql([]);
+  });
+});
