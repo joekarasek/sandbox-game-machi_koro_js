@@ -29,6 +29,7 @@ Dice.prototype.roll = function() {
 }
 
 
+
 // Player Constructor
 //===================
 function Player(playerName) {
@@ -36,10 +37,22 @@ function Player(playerName) {
   this.cardStack = [];
   this.purse = 3;
   this.landmarks = [false,false,false,false];
-  // isTurn boolean?
+  this.turn = false;
+  this.dice = new Dice();
 }
-
-
+Player.prototype.rollOneDie = function() {
+  this.dice.roll();
+  return this.dice.dieOne;
+}
+Player.prototype.rollTwoDie = function() {
+  this.dice.roll();
+  return this.dice.dieOne + this.dice.dieTwo;
+}
+//
+// Player.prototype.endTurn = function() {
+//   this.turn = false;
+//
+// }
 // CardBank Constructor
 //=====================
 function CardBank() {

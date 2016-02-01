@@ -18,6 +18,15 @@ describe('Player', function() {
     expect(testPlayer.cardStack).to.eql([]);
     expect(testPlayer.monuments).to.eql([false,false,false,false]);
   });
+  it('rollOneDie will determine the number of dice being rolled', function(){
+    var testPlayer = new Player("Michaela");
+    expect(testPlayer.rollOneDie()).to.equal(testPlayer.dice < 7);
+  });
+  it('has a method rollOneDie that returns the value of one Dice', function(){
+    var testPlayer = new Player("Michaela");
+    expect(testPlayer.rollOneDie()).to.equal(testPlayer.dice.dieOne);
+    console.log(testPlayer);
+  });
 });
 describe('Dice', function() {
   // check the initial values
