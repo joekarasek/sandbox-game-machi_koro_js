@@ -48,6 +48,25 @@ function CardBank() {
 CardBank.prototype.emptyBank = function() {
   this.cards = [];
 }
+CardBank.prototype.removeCard = function(cardNameToRemove) {
+  var isPresent = false;
+  var loopIndex = 0;
+  var cardLocations = [];
+  this.cards.forEach(function(card) {
+    console.log(card);
+    if(card.cardName === cardNameToRemove) {
+      cardLocations.push(loopIndex);
+      isPresent = true;
+    }
+    loopIndex++;
+  });
+  console.log(cardLocations);
+  if (cardLocations !== []) {
+    this.cards.splice(cardLocations[0], 1);
+  }
+  console.log(this.cards);
+  return isPresent;
+}
 CardBank.prototype.setStandardBank = function() {
   var wheatFields = 6;
   do {

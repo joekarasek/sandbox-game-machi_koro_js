@@ -41,10 +41,19 @@ describe('CardBank', function() {
     var testCardBank = new CardBank();
     expect(testCardBank.cards).to.eql([]);
   });
-  it('has a method to fill the cardBank with the standard card set', function() {
+  it('has a method to fill the cardBank with the standard card set (see testCardBank object in console)', function() {
     var testCardBank = new CardBank();
     testCardBank.setStandardBank();
     console.log(testCardBank);
     // expect(testCardBank.cards).to.eql([]);
+  });
+  it('has a removeCard method that returns false if the card is not present',function() {
+    var testCardBank = new CardBank();
+    expect(testCardBank.removeCard("Forest")).to.equal(false);
+  });
+  it('has a removeCard method that returns true and removes the card if the card is present',function() {
+    var testCardBank = new CardBank();
+    testCardBank.setStandardBank();
+    expect(testCardBank.removeCard("Bakery")).to.equal(true);
   });
 });
