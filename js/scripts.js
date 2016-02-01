@@ -4,12 +4,13 @@
 
 // Card Constructor
 // ================
-function Card(cardKey, cardName, cardColor, cardPayout, cardType) {
+function Card(cardKey, cardName, cardColor, cardPayout, cardType, cardCost) {
   this.cardKey = cardKey;
   this.cardName = cardName;
   this.cardColor = cardColor;
   this.cardPayout = cardPayout;
   this.cardType = cardType;
+  this.cardCost = cardCost;
 }
 
 
@@ -27,6 +28,7 @@ Dice.prototype.roll = function() {
 }
 
 
+
 // Player Constructor
 //===================
 function Player(playerName) {
@@ -34,9 +36,22 @@ function Player(playerName) {
   this.cardStack = [];
   this.purse = 3;
   this.monuments = [false,false,false,false];
+  this.turn = false;
+  this.dice = new Dice();
 }
-
-
+Player.prototype.rollOneDie = function() {
+  this.dice.roll();
+  return this.dice.dieOne;
+}
+Player.prototype.rollTwoDie = function() {
+  this.dice.roll();
+  return this.dice.dieOne + this.dice.dieTwo;
+}
+//
+// Player.prototype.endTurn = function() {
+//   this.turn = false;
+//
+// }
 // CardBank Constructor
 //=====================
 function CardBank() {
