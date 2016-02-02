@@ -11,7 +11,6 @@ function Card(cardKey, cardName, cardColor, cardPayout, cardType, cardCost) {
   this.cardPayout = cardPayout;
   this.cardType = cardType;
   this.cardCost = cardCost;
-  // add cost
 }
 
 
@@ -81,68 +80,32 @@ CardBank.prototype.removeCard = function(cardNameToRemove) {
   }
   return isPresent;
 }
+
+
 CardBank.prototype.setStandardBank = function() {
-  var wheatFields = 6;
-  do {
-    this.cards.push(new Card([1], "Wheat Field", "blue", 1, "wheat", 1));
-    wheatFields--;
-  } while(wheatFields>0);
-  var bakery = 6;
-  do {
-    this.cards.push(new Card([2,3], "Bakery", "green", 1, "store", 1));
-    bakery--;
-  } while(bakery>0);
-  var ranch = 6;
-  do {
-    this.cards.push(new Card([2], "Ranch", "blue", 1, "cow", 1));
-    ranch--;
-  } while(ranch>0);
-  var cafe= 6;
-  do {
-    this.cards.push(new Card([3], "Cafe", "red", 1, "cafe", 2));
-    cafe--;
-  } while(cafe>0);
-  var convenienceStore = 6;
-  do {
-    this.cards.push(new Card([4], "Convenience Store", "green", 3, "store", 2));
-    convenienceStore--;
-  } while(convenienceStore>0);
-  var forest = 6;
-  do {
-    this.cards.push(new Card([5], "Forest", "blue", 1, "cog", 3));
-    forest--;
-  } while(forest>0);
-  var cheeseFactory = 6;
-  do {
-    this.cards.push(new Card([7], "Cheese Factory", "green", 3, "factory", 5));
-    cheeseFactory--;
-  } while(cheeseFactory>0);
-  var furnitureFactory = 6;
-  do {
-    this.cards.push(new Card([8], "Furniture Factory", "green", 3, "factory", 3));
-    furnitureFactory--;
-  } while(furnitureFactory>0);
-  var mine = 6;
-  do {
-    this.cards.push(new Card([9], "Mine", "blue", 5, "cog", 6));
-    mine--;
-  } while(mine>0);
-  var familyRestaurant = 6;
-  do {
-    this.cards.push(new Card([9,10], "Family Restaurant", "red", 2, "cafe", 3));
-    familyRestaurant--;
-  } while(familyRestaurant>0);
-  var appleOrchard = 6;
-  do {
-    this.cards.push(new Card([10], "Apple Orchard", "blue", 3, "wheat", 3));
-    appleOrchard--;
-  } while(appleOrchard>0);
-  var fruitMarket = 6;
-  do {
-    this.cards.push(new Card([11,12], "Fruit Market", "green", 2, "fruit", 2));
-    fruitMarket--;
-  } while(fruitMarket>0);
+  var temp_arr = [
+    new Card([1], "Wheat Field", "blue", 1, "wheat", 1),
+    new Card([2,3], "Bakery", "green", 1, "store", 1),
+    new Card([2], "Ranch", "blue", 1, "cow", 1),
+    new Card([3], "Cafe", "red", 1, "cafe", 2),
+    new Card([4], "Convenience Store", "green", 3, "store", 2),
+    new Card([5], "Forest", "blue", 1, "cog", 3),
+    new Card([7], "Cheese Factory", "green", 3, "factory", 5),
+    new Card([8], "Furniture Factory", "green", 3, "factory", 3),
+    new Card([9], "Mine", "blue", 5, "cog", 6),
+    new Card([9,10], "Family Restaurant", "red", 2, "cafe", 3),
+    new Card([10], "Apple Orchard", "blue", 3, "wheat", 3),
+    new Card([11,12], "Fruit Market", "green", 2, "fruit", 2)
+  ]
+
+  for (var i = 0; i < temp_arr.length; i++) {
+      var card = temp_arr[i];
+      for (var j = 6; j > 0; j--) {
+        this.cards.push(card);
+      }
+  }
 }
+
 
 // Game Constructor
 //=====================
