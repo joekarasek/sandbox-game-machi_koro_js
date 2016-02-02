@@ -29,7 +29,8 @@ describe('Player', function() {
     var testPlayer = new Player("Michaela");
     expect(testPlayer.playerName).to.equal("Michaela");
     expect(testPlayer.purse).to.equal(3);
-    expect(testPlayer.cardStack).to.eql([]);
+    expect(testPlayer.cardStack).to.eql([new Card([1], "Wheat Field", "blue", 1, "wheat", 1),
+    new Card([2,3], "Bakery", "green", 1, "store", 1)]);
     expect(testPlayer.landmarks).to.eql([
       new Landmark("Train Station", 4),
       new Landmark("Shopping Mall", 10),
@@ -62,7 +63,7 @@ describe('Player', function() {
     var testPlayer = new Player("Michaela");
     var testCard = new Card([2], "Ranch", "blue", 1, "cow", 1);
     testPlayer.addCard(testCard);
-    expect(testPlayer.cardStack[0]).to.eql(testCard);
+    expect(testPlayer.cardStack[2]).to.eql(testCard);
     expect(testPlayer.purse).to.equal(2);
   });
   it('has a method addLandmark that changes landmarkActive to true', function(){
@@ -88,14 +89,14 @@ describe('Player', function() {
     var testCard = new Card([2], "Ranch", "green", 1, "cow", 1);
     testPlayer.addCard(testCard);
     testPlayer.getGreenPayout(2);
-    expect(testPlayer.purse).to.equal(3);
+    expect(testPlayer.purse).to.equal(4);
     var testCard2 = new Card([1,2], "Ranch", "green", 1, "cow", 1);
     testPlayer.addCard(testCard2);
     testPlayer.getGreenPayout(2);
-    expect(testPlayer.purse).to.equal(4);
+    expect(testPlayer.purse).to.equal(6);
     testPlayer.isTurn = false;
     testPlayer.getGreenPayout(2);
-    expect(testPlayer.purse).to.equal(4);
+    expect(testPlayer.purse).to.equal(6);
   });
   it('has a method getGreenPayout that adds the right amount of payout for green "factory" cards, only if isTurn is true', function(){
     var testPlayer = new Player("Michaela");
@@ -119,7 +120,7 @@ describe('Player', function() {
     testPlayer.addCard(testFactory2Card);
     testPlayer.purse = 0;
     testPlayer.getGreenPayout(11);
-    expect(testPlayer.purse).to.equal(6);
+    expect(testPlayer.purse).to.equal(8);
   });
   it('has a method giveRedPayout that takes money from the purse and gives it to another player', function() {
     var testPlayerGiving = new Player("Michaela");

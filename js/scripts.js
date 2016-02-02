@@ -43,7 +43,10 @@ Dice.prototype.roll = function() {
 //===================
 function Player(playerName) {
   this.playerName = playerName;
-  this.cardStack = [];
+  this.cardStack = [
+    new Card([1], "Wheat Field", "blue", 1, "wheat", 1),
+    new Card([2,3], "Bakery", "green", 1, "store", 1)
+  ];
   this.purse = 3;
   this.landmarks = [
     new Landmark("Train Station", 4),
