@@ -203,10 +203,63 @@ Game.prototype.addPlayer = function(playerToAdd) {
 }
 // next turn method
 Game.prototype.updateActivePlayerIndex = function() {
+  this.players[this.activePlayerIndex].isTurn = false;
   if (this.activePlayerIndex < this.players.length-1) {
     this.activePlayerIndex ++;
   } else {
     this.activePlayerIndex = 0;
   }
+  this.players[this.activePlayerIndex].isTurn = true;
+}
+Game.prototype.canActivePlayerRollTwoDice = function() {
+  if (this.players[this.activePlayerIndex].landmarks[0].landmarkActive) {
+    return true;
+  }
+  return false;
 }
 // ??? method to determine who goes first
+
+
+// ===========================
+//     User Interface
+// ===========================
+var addNewPlayerToGame = function(game) {
+  if ($('form#playerSetup input').val() === '') {
+    alert("You must assign a player name to add a player.");
+    return;
+  }
+  if (game.players.length > 3) {
+    alert("This game is shitty with more than 4 people.");
+    return;
+  }
+  game.addPlayer(new Player( $('form#playerSetup input').val() ) );
+  $('#playerList').append('<li>'+$('form#playerSetup input').val()+'</li>');
+  $('form#playerSetup input').val('');
+  $('form#playerSetup input').focus();
+  if (game.players.length >=2) {
+    $('#startGameButton').show();
+  }
+}
+var hideAndShowDivs = function(divToHide, divToShow) {
+  $(divToHide).hide();
+  $(divToShow).show();
+}
+$(document).ready(function() {
+  var currentGame = new Game();
+  $('form#playerSetup input').focus();
+
+  $('.intro_screen').click(function() {
+    hideAndShowDivs('.intro_screen','.player_creation');
+  });
+
+  $('form#playerSetup').submit(function(event) {
+    event.preventDefault();
+    addNewPlayerToGame(currentGame);
+  });
+
+  $('#startGameButton').click(function() {
+    hideAndShowDivs(".player_creation", ".main_game_div");
+    console.log(currentGame);
+  });
+
+});
