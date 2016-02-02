@@ -48,7 +48,6 @@ describe('Player', function() {
   });
   it('has a method getBluePayout that adds the right amount of payout for blue cards', function(){
     var testPlayer = new Player("Michaela");
-    testPlayer.isTurn = true;
     var testCard = new Card([2], "Ranch", "blue", 1, "cow", 1);
     testPlayer.addCard(testCard);
     testPlayer.getBluePayout(2);
@@ -56,6 +55,21 @@ describe('Player', function() {
     var testCard2 = new Card([1,2], "Ranch", "blue", 1, "cow", 1);
     testPlayer.addCard(testCard2);
     testPlayer.getBluePayout(2);
+    expect(testPlayer.purse).to.equal(4);
+  });
+  it('has a method getGreenPayout that adds the right amount of payout for blue cards, only if isTurn is true', function(){
+    var testPlayer = new Player("Michaela");
+    testPlayer.isTurn = true;
+    var testCard = new Card([2], "Ranch", "green", 1, "cow", 1);
+    testPlayer.addCard(testCard);
+    testPlayer.getGreenPayout(2);
+    expect(testPlayer.purse).to.equal(3);
+    var testCard2 = new Card([1,2], "Ranch", "green", 1, "cow", 1);
+    testPlayer.addCard(testCard2);
+    testPlayer.getGreenPayout(2);
+    expect(testPlayer.purse).to.equal(4);
+    testPlayer.isTurn = false;
+    testPlayer.getGreenPayout(2);
     expect(testPlayer.purse).to.equal(4);
   });
 });

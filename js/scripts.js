@@ -53,6 +53,15 @@ Player.prototype.addCard = function(card) {
 }
 Player.prototype.getBluePayout = function(diceValue) {
   var payOut = 0;
+  this.cardStack.forEach(function(card) {
+    if (card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "blue") {
+      payOut += card.cardPayout;
+    }
+  });
+  this.purse += payOut;
+}
+Player.prototype.getGreenPayout = function(diceValue) {
+  var payOut = 0;
   var isTurn = this.isTurn;
   this.cardStack.forEach(function(card) {
     //eventually build this if into an else if to handle factory
@@ -112,7 +121,7 @@ CardBank.prototype.setStandardBank = function() {
     new Card([9], "Mine", "blue", 5, "cog", 6),
     new Card([9,10], "Family Restaurant", "red", 2, "cafe", 3),
     new Card([10], "Apple Orchard", "blue", 3, "wheat", 3),
-    new Card([11,12], "Fruit Market", "green", 2, "fruit", 2)
+    new Card([11,12], "Fruit Market", "green", 2, "factory", 2)
   ];
 
   for (var i = 0; i < temp_arr.length; i++) {

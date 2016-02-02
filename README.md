@@ -25,6 +25,8 @@ _{Leave nothing to chance! You want it to be easy for potential users, employers
 
 _{Are there issues that have not yet been resolved that you want to let users know you know?  Outline any issues that would impact use of your application.  Share any workarounds that are in place. }_
 
+Current version has a patch to handle the "factory" type of card, the Fruit and Vegetable Market is marked as a factory type, wrongly, to make the patch work.
+
 ## Support and contact details
 
 _{Let people know what to do if they run into any issues or have questions, ideas or concerns.  Encourage them to contact you or make a contribution to the code.}_
