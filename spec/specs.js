@@ -1,3 +1,17 @@
+describe('Landmark', function(){
+  it('creates a landmark card with the correct properties', function() {
+    var testLandmark = new Landmark("Train Station", 4);
+    expect(testLandmark.landmarkName).to.equal("Train Station");
+    expect(testLandmark.landmarkCost).to.equal(4);
+    expect(testLandmark.landmarkActive).to.equal(false);
+  });
+  it('pushes landmarks in LandmarkInitializer into player landmarks array', function() {
+    var testPlayer = new Player("Michaela");
+    var testLandmark = new Landmark("Train Station", 4);
+    expect()
+  })
+});
+
 describe('Card', function() {
   // check the initial values
   it('creates a game card with the correct properties', function() {
@@ -16,7 +30,12 @@ describe('Player', function() {
     expect(testPlayer.playerName).to.equal("Michaela");
     expect(testPlayer.purse).to.equal(3);
     expect(testPlayer.cardStack).to.eql([]);
-    expect(testPlayer.landmarks).to.eql([false,false,false,false]);
+    expect(testPlayer.landmarks).to.eql([
+      new Landmark("Train Station", 4),
+      new Landmark("Shopping Mall", 10),
+      new Landmark("Amusement Park", 16),
+      new Landmark("Radio Tower", 22)
+    ]);
   });
   it('rollOneDie will roll the player dice and return the value of one die', function(){
     var testPlayer = new Player("Michaela");
@@ -28,15 +47,15 @@ describe('Player', function() {
   });
   it('has a method hasWon that returns false if any of the landmarks are not purchased (false)', function(){
     var testPlayer = new Player("Michaela");
-    testPlayer.landmarks[2] = true;
+    testPlayer.landmarks[2].landmarkActive = true;
     expect(testPlayer.hasWon()).to.equal(false);
   });
   it('has a method hasWon that returns true if all the landmarks have been bought', function(){
     var testPlayer = new Player("Michaela");
-    testPlayer.landmarks[0] = true;
-    testPlayer.landmarks[1] = true;
-    testPlayer.landmarks[2] = true;
-    testPlayer.landmarks[3] = true;
+    testPlayer.landmarks[0].landmarkActive = true;
+    testPlayer.landmarks[1].landmarkActive = true;
+    testPlayer.landmarks[2].landmarkActive = true;
+    testPlayer.landmarks[3].landmarkActive = true;
     expect(testPlayer.hasWon()).to.equal(true);
   });
   it('has a method addCard that adds card to cardStack', function(){
@@ -45,6 +64,12 @@ describe('Player', function() {
     testPlayer.addCard(testCard);
     expect(testPlayer.cardStack[0]).to.eql(testCard);
     expect(testPlayer.purse).to.equal(2);
+  });
+  it('has a method addLandmark that changes landmarkActive to true', function(){
+    var testPlayer = new Player("Michela");
+    var testObjectLandmark = new Landmark("Train Station", 4);
+    testPlayer.landmarkTrue(testObjectLandmark);
+    expect(testPlayer.landmarks[0].landmarkActive).to.equal(true);
   });
   it('has a method getBluePayout that adds the right amount of payout for blue cards', function(){
     var testPlayer = new Player("Michaela");
