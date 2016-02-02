@@ -53,9 +53,10 @@ Player.prototype.addCard = function(card) {
 }
 Player.prototype.getBluePayout = function(diceValue) {
   var payOut = 0;
+  var isTurn = this.isTurn;
   this.cardStack.forEach(function(card) {
     //eventually build this if into an else if to handle factory
-    if (card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "blue") {
+    if (card.cardKey.indexOf(diceValue) !== -1 && isTurn === true) {
       payOut += card.cardPayout;
     }
   });

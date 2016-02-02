@@ -48,6 +48,7 @@ describe('Player', function() {
   });
   it('has a method getBluePayout that adds the right amount of payout for blue cards', function(){
     var testPlayer = new Player("Michaela");
+    testPlayer.isTurn = true;
     var testCard = new Card([2], "Ranch", "blue", 1, "cow", 1);
     testPlayer.addCard(testCard);
     testPlayer.getBluePayout(2);
