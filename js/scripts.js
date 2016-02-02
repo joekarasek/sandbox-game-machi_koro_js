@@ -245,6 +245,10 @@ $(document).ready(function() {
   var currentGame = new Game();
   $('form#playerSetup input').focus();
 
+  $('.intro_screen').click(function() {
+    hideAndShowDivs('.intro_screen','.player_creation');
+  });
+
   $('form#playerSetup').submit(function(event) {
     event.preventDefault();
     addNewPlayerToGame(currentGame);
@@ -253,6 +257,6 @@ $(document).ready(function() {
   $('#startGameButton').click(function() {
     hideAndShowDivs(".player_creation", ".main_game_div");
     console.log(currentGame);
-  })
+  });
 
 });
