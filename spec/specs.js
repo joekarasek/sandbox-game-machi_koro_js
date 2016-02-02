@@ -26,6 +26,23 @@ describe('Player', function() {
     var testPlayer = new Player("Michaela");
     expect(testPlayer.rollTwoDie()).to.equal(testPlayer.dice.dieOne+testPlayer.dice.dieTwo);
   });
+  it('has a method hasWon that returns false if any of the landmarks are not purchased (false)', function(){
+    var testPlayer = new Player("Michaela");
+    testPlayer.landmarks[2] = true;
+    expect(testPlayer.hasWon()).to.equal(false);
+  });
+  it('has a method hasWon that returns true if all the landmarks have been bought', function(){
+    var testPlayer = new Player("Michaela");
+    testPlayer.landmarks[0] = true;
+    testPlayer.landmarks[1] = true;
+    testPlayer.landmarks[2] = true;
+    testPlayer.landmarks[3] = true;
+    expect(testPlayer.hasWon()).to.equal(true);
+  });
+  // it('has a method rollTwoDie that returns the value of both dice', function(){
+  //   var testPlayer = new Player("Michaela");
+  //   expect(testPlayer.rollTwoDie()).to.equal(testPlayer.dice.dieOne+testPlayer.dice.dieTwo);
+  // });
 });
 describe('Dice', function() {
   // check the initial values
