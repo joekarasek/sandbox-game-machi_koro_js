@@ -220,7 +220,22 @@ Game.prototype.canActivePlayerRollTwoDice = function() {
 // ===========================
 //     User Interface
 // ===========================
+var addNewPlayerToGame = function(game) {
+  game.addPlayer(new Player( $('form#playerSetup input').val() ) );
+  $('form#playerSetup input').val('');
+  $('form#playerSetup input').focus();
+  if (game.players.length >=2) {
+    $('#startGameButton').show();
+  }
+}
 
 $(document).ready(function() {
+  var currentGame = new Game();
+  $('form#playerSetup input').focus();
+
+  $('form#playerSetup').submit(function(event) {
+    event.preventDefault();
+    addNewPlayerToGame(currentGame);
+  });
 
 });
