@@ -37,7 +37,7 @@ function Player(playerName) {
   this.cardStack = [];
   this.purse = 3;
   this.landmarks = [false,false,false,false];
-  this.turn = false;
+  this.isTurn = false;
   this.dice = new Dice();
 }
 Player.prototype.rollOneDie = function() {
@@ -48,7 +48,10 @@ Player.prototype.rollTwoDie = function() {
   this.dice.roll();
   return this.dice.dieOne + this.dice.dieTwo;
 }
-//
+Player.prototype.addCard = function(card) {
+  this.purse -= card.cardCost;
+  this.cardStack.push(card);
+}
 // Player.prototype.endTurn = function() {
 //   this.turn = false;
 //
