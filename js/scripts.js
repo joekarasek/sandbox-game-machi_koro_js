@@ -81,6 +81,18 @@ Player.prototype.getGreenPayout = function(diceValue) {
   });
   this.purse += payOut;
 }
+Player.prototype.requestRedPayout = function(){}
+
+Player.prototype.giveRedPayout = function(playerToPay, amountToPay) {
+  if (this.purse >= amountToPay) {
+    this.purse -= amountToPay;
+    playerToPay.purse += amountToPay
+  } else {
+    playerToPay.purse += this.purse;
+    this.purse = 0;
+  }
+}
+
 Player.prototype.hasWon = function() {
   if (this.landmarks[0] === true && this.landmarks[1] === true && this.landmarks[2] === true && this.landmarks[3] === true) {
     return true;

@@ -96,6 +96,17 @@ describe('Player', function() {
     testPlayer.getGreenPayout(11);
     expect(testPlayer.purse).to.equal(6);
   });
+  it('has a method giveRedPayout that takes money from the purse and gives it to another player', function() {
+    var testPlayerGiving = new Player("Michaela");
+    var testPlayerReceiving = new Player("Mao");
+    testPlayerGiving.giveRedPayout(testPlayerReceiving, 3);
+    expect(testPlayerReceiving.purse).to.equal(6);
+    expect(testPlayerGiving.purse).to.equal(0);
+    testPlayerGiving.purse = 1;
+    testPlayerGiving.giveRedPayout(testPlayerReceiving, 3);
+    expect(testPlayerReceiving.purse).to.equal(7);
+    expect(testPlayerGiving.purse).to.equal(0);
+  });
 });
 describe('Dice', function() {
   // check the initial values
