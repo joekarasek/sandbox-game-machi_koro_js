@@ -10,6 +10,7 @@ function Landmark(landmarkName, landmarkCost) {
   this.landmarkActive = false;
 }
 
+
 // Card Constructor
 // ================
 function Card(cardKey, cardName, cardColor, cardPayout, cardType, cardCost) {
@@ -43,7 +44,12 @@ function Player(playerName) {
   this.playerName = playerName;
   this.cardStack = [];
   this.purse = 3;
-  this.landmarks = [false,false,false,false];
+  this.landmarks = [
+    new Landmark("Train Station", 4),
+    new Landmark("Shopping Mall", 10),
+    new Landmark("Amusement Park", 16),
+    new Landmark("Radio Tower", 22)
+  ];
   this.isTurn = false;
   this.dice = new Dice();
 }
@@ -70,7 +76,7 @@ Player.prototype.getBluePayout = function(diceValue) {
   this.purse += payOut;
 }
 Player.prototype.hasWon = function() {
-  if (this.landmarks[0] === true && this.landmarks[1] === true && this.landmarks[2] === true && this.landmarks[3] === true) {
+  if (this.landmarks[0].landmarkActive && this.landmarks[1].landmarkActive && this.landmarks[2].landmarkActive && this.landmarks[3].landmarkActive) {
     return true;
   }
   return false;
