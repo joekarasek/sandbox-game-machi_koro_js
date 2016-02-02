@@ -244,6 +244,14 @@ var hideAndShowDivs = function(divToHide, divToShow) {
   $(divToHide).hide();
   $(divToShow).show();
 }
+// show available/purchased cards
+// hide unavailable cards
+// highlight active players div
+// update UI with players current purse value
+// update UI card counts
+//UI function at end of game to reset everything
+
+
 $(document).ready(function() {
   var currentGame = new Game();
   $('form#playerSetup input').focus();
@@ -262,4 +270,16 @@ $(document).ready(function() {
     console.log(currentGame);
   });
 
+  // event handler for roll one dice button
+
+
+  // event handler for roll two dice button
+
+
+  // event handler for click on bank card, will remove from bank and add to player, if player can afford it, end turn if successful
+
+  // event handler for button end turn without purchase
+
+  //event handler for purchasing landmark
+      //include a check for winner
 });
