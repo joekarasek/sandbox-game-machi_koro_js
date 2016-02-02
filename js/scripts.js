@@ -221,14 +221,26 @@ Game.prototype.canActivePlayerRollTwoDice = function() {
 //     User Interface
 // ===========================
 var addNewPlayerToGame = function(game) {
+  if ($('form#playerSetup input').val() === '') {
+    alert("You must assign a player name to add a player.");
+    return;
+  }
+  if (game.players.length > 3) {
+    alert("This game is shitty with more than 4 people.");
+    return;
+  }
   game.addPlayer(new Player( $('form#playerSetup input').val() ) );
+  $('#playerList').append('<li>'+$('form#playerSetup input').val()+'</li>');
   $('form#playerSetup input').val('');
   $('form#playerSetup input').focus();
   if (game.players.length >=2) {
     $('#startGameButton').show();
   }
 }
-
+var hideAndShowDivs = function(divToHide, divToShow) {
+  $(divToHide).hide();
+  $(divToShow).show();
+}
 $(document).ready(function() {
   var currentGame = new Game();
   $('form#playerSetup input').focus();
@@ -237,5 +249,10 @@ $(document).ready(function() {
     event.preventDefault();
     addNewPlayerToGame(currentGame);
   });
+
+  $('#startGameButton').click(function() {
+    hideAndShowDivs(".player_creation", ".main_game_div");
+    console.log(currentGame);
+  })
 
 });
