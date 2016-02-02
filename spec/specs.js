@@ -16,16 +16,15 @@ describe('Player', function() {
     expect(testPlayer.playerName).to.equal("Michaela");
     expect(testPlayer.purse).to.equal(3);
     expect(testPlayer.cardStack).to.eql([]);
-    expect(testPlayer.monuments).to.eql([false,false,false,false]);
+    expect(testPlayer.landmarks).to.eql([false,false,false,false]);
   });
-  it('rollOneDie will determine the number of dice being rolled', function(){
-    var testPlayer = new Player("Michaela");
-    expect(testPlayer.rollOneDie()).to.equal(testPlayer.dice < 7);
-  });
-  it('has a method rollOneDie that returns the value of one Dice', function(){
+  it('rollOneDie will roll the player dice and return the value of one die', function(){
     var testPlayer = new Player("Michaela");
     expect(testPlayer.rollOneDie()).to.equal(testPlayer.dice.dieOne);
-    console.log(testPlayer);
+  });
+  it('has a method rollTwoDie that returns the value of both dice', function(){
+    var testPlayer = new Player("Michaela");
+    expect(testPlayer.rollTwoDie()).to.equal(testPlayer.dice.dieOne+testPlayer.dice.dieTwo);
   });
 });
 describe('Dice', function() {
@@ -53,7 +52,6 @@ describe('CardBank', function() {
   it('has a method to fill the cardBank with the standard card set (see testCardBank object in console)', function() {
     var testCardBank = new CardBank();
     testCardBank.setStandardBank();
-    console.log(testCardBank);
     // expect(testCardBank.cards).to.eql([]);
   });
   it('has a removeCard method that returns false if the card is not present',function() {
