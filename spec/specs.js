@@ -107,6 +107,15 @@ describe('Player', function() {
     expect(testPlayerReceiving.purse).to.equal(7);
     expect(testPlayerGiving.purse).to.equal(0);
   });
+  it('has a method requestRedPayout that returns the right amount of money to request from another player', function() {
+    var testPlayer = new Player("Michaela");
+    var testCard = new Card([3], "Cafe", "red", 1, "cafe", 2);
+    testPlayer.addCard(testCard);
+    expect(testPlayer.requestRedPayout()).to.equal(1);
+    testPlayer.addCard(testCard);
+    testPlayer.addCard(testCard);
+    expect(testPlayer.requestRedPayout()).to.equal(3);
+  });
 });
 describe('Dice', function() {
   // check the initial values

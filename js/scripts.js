@@ -81,8 +81,15 @@ Player.prototype.getGreenPayout = function(diceValue) {
   });
   this.purse += payOut;
 }
-Player.prototype.requestRedPayout = function(){}
-
+Player.prototype.requestRedPayout = function(){
+  var requestedAmount = 0;
+  this.cardStack.forEach(function(card) {
+    if (card.cardColor === "red") {
+      requestedAmount += card.cardPayout;
+    }
+  });
+  return requestedAmount;
+}
 Player.prototype.giveRedPayout = function(playerToPay, amountToPay) {
   if (this.purse >= amountToPay) {
     this.purse -= amountToPay;
