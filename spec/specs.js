@@ -224,8 +224,10 @@ describe('Game', function() {
   it('has a method canActivePlayerRollTwoDice that returns true or false if they can roll two dice', function() {
     var testGame = new Game();
     var testPlayer = new Player("Michaela");
+    var testLandmark = new Landmark("Train Station", 4);
+    testGame.addPlayer(testPlayer);
     expect(testGame.canActivePlayerRollTwoDice()).to.equal(false);
-    testPlayer.addLandmark("Train Station");
+    testPlayer.landmarkTrue(testLandmark);
     expect(testGame.canActivePlayerRollTwoDice()).to.equal(true);
   })
 });
