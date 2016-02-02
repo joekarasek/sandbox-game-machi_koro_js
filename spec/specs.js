@@ -35,6 +35,37 @@ describe('Player', function() {
     var testPlayer = new Player("Michaela");
     expect(testPlayer.rollTwoDie()).to.equal(testPlayer.dice.dieOne+testPlayer.dice.dieTwo);
   });
+  it('has a method hasWon that returns false if any of the landmarks are not purchased (false)', function(){
+    var testPlayer = new Player("Michaela");
+    testPlayer.landmarks[2] = true;
+    expect(testPlayer.hasWon()).to.equal(false);
+  });
+  it('has a method hasWon that returns true if all the landmarks have been bought', function(){
+    var testPlayer = new Player("Michaela");
+    testPlayer.landmarks[0] = true;
+    testPlayer.landmarks[1] = true;
+    testPlayer.landmarks[2] = true;
+    testPlayer.landmarks[3] = true;
+    expect(testPlayer.hasWon()).to.equal(true);
+  });
+  it('has a method addCard that adds card to cardStack', function(){
+    var testPlayer = new Player("Michaela");
+    var testCard = new Card([2], "Ranch", "blue", 1, "cow", 1);
+    testPlayer.addCard(testCard);
+    expect(testPlayer.cardStack[0]).to.eql(testCard);
+    expect(testPlayer.purse).to.equal(2);
+  });
+  it('has a method getBluePayout that adds the right amount of payout for blue cards', function(){
+    var testPlayer = new Player("Michaela");
+    var testCard = new Card([2], "Ranch", "blue", 1, "cow", 1);
+    testPlayer.addCard(testCard);
+    testPlayer.getBluePayout(2);
+    expect(testPlayer.purse).to.equal(3);
+    var testCard2 = new Card([1,2], "Ranch", "blue", 1, "cow", 1);
+    testPlayer.addCard(testCard2);
+    testPlayer.getBluePayout(2);
+    expect(testPlayer.purse).to.equal(4);
+  });
 });
 describe('Dice', function() {
   // check the initial values
