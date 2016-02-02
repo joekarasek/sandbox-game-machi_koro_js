@@ -167,5 +167,20 @@ CardBank.prototype.setStandardBank = function() {
 function Game() {
   // Will contain players, cardBank, activePlayerIndex,
   this.cardBank = new CardBank();
-  // this.cardBank.setStandardBank();
+  this.cardBank.setStandardBank();
+  this.players = [];
+  this.activePlayerIndex = 0;
 }
+// method for adding players to game
+Game.prototype.addPlayer = function(playerToAdd) {
+  this.players.push(playerToAdd);
+}
+// next turn method
+Game.prototype.updateActivePlayerIndex = function() {
+  if (this.activePlayerIndex < this.players.length-1) {
+    this.activePlayerIndex ++;
+  } else {
+    this.activePlayerIndex = 0;
+  }
+}
+// ??? method to determine who goes first

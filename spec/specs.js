@@ -154,3 +154,29 @@ describe('CardBank', function() {
     expect(testCardBank.removeCard("Bakery")).to.equal(true);
   });
 });
+describe('Game', function() {
+  //test the Game Constructor
+  it('creates a Game object with the correct properties', function () {
+    var testGame = new Game();
+    expect(testGame.cardBank.cards.length > 0).to.equal(true);
+    expect(testGame.players).to.eql([]);
+    expect(testGame.activePlayerIndex).to.equal(0);
+  });
+  it('has a method addPlayer that adds a player to the games player array', function () {
+    var testGame = new Game();
+    var testPlayer = new Player("Michaela");
+    testGame.addPlayer(testPlayer);
+    expect(testGame.players[0]).to.eql(testPlayer);
+    var testPlayer2 = new Player("Mao");
+    testGame.addPlayer(testPlayer2);
+    expect(testGame.players[1].playerName).to.equal("Mao");
+  });
+  // it('creates a Game object with the correct properties', function () {
+  //   var testGame = new Game();
+  //   expect(testGame.cardBank.length > 0).to.equal(true);
+  //   expect(testGame.player).to.eql([]);
+  //   expect(testGame.activePlayerIndex).to.equal(0);
+  // });
+  // test the add player method
+  // test the updateActivePlayerIndex method
+});
