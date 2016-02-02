@@ -192,3 +192,12 @@ Game.prototype.canActivePlayerRollTwoDice = function() {
   return false;
 }
 // ??? method to determine who goes first
+
+
+// ===========================
+//     User Interface
+// ===========================
+
+$(document).ready(function() {
+
+});
