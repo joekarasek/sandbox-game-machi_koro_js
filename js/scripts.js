@@ -66,6 +66,15 @@ Player.prototype.addCard = function(card) {
   this.purse -= card.cardCost;
   this.cardStack.push(card);
 }
+Player.prototype.landmarkTrue = function(landmark) {
+  this.purse -= landmark.landmarkCost;
+  this.landmarks.forEach(function(landmark2){
+    if (landmark2.landmarkName === landmark.landmarkName) {
+      landmark2.landmarkActive = true;
+    }
+  });
+}
+
 Player.prototype.getBluePayout = function(diceValue) {
   var payOut = 0;
   this.cardStack.forEach(function(card) {

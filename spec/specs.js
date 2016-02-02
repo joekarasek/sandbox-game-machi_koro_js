@@ -65,6 +65,12 @@ describe('Player', function() {
     expect(testPlayer.cardStack[0]).to.eql(testCard);
     expect(testPlayer.purse).to.equal(2);
   });
+  it('has a method addLandmark that changes landmarkActive to true', function(){
+    var testPlayer = new Player("Michela");
+    var testObjectLandmark = new Landmark("Train Station", 4);
+    testPlayer.landmarkTrue(testObjectLandmark);
+    expect(testPlayer.landmarks[0].landmarkActive).to.equal(true);
+  });
   it('has a method getBluePayout that adds the right amount of payout for blue cards', function(){
     var testPlayer = new Player("Michaela");
     var testCard = new Card([2], "Ranch", "blue", 1, "cow", 1);
