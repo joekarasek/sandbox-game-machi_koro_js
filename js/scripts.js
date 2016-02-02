@@ -4,13 +4,14 @@
 
 // Card Constructor
 // ================
-function Card(cardKey, cardName, cardColor, cardPayout, cardType, cardCost) {
+function Card(cardKey, cardName, cardColor, cardPayout, cardType, cardCost, cardMultiplier) {
   this.cardKey = cardKey;
   this.cardName = cardName;
   this.cardColor = cardColor;
   this.cardPayout = cardPayout;
   this.cardType = cardType;
   this.cardCost = cardCost;
+  this.cardMultiplier = cardMultiplier; //is a string equal to cardType that multiplies
 }
 
 
@@ -63,9 +64,18 @@ Player.prototype.getBluePayout = function(diceValue) {
 Player.prototype.getGreenPayout = function(diceValue) {
   var payOut = 0;
   var isTurn = this.isTurn;
+  var thisPlayer = this;
+  var multiplier = 0;
   this.cardStack.forEach(function(card) {
-    //eventually build this if into an else if to handle factory
-    if (card.cardKey.indexOf(diceValue) !== -1 && isTurn === true) {
+    if (card.cardMultiplier !== undefined && card.cardKey.indexOf(diceValue) !== -1) {
+      thisPlayer.cardStack.forEach(function(card2) {
+        if (card.cardMultiplier === card2.cardType) {
+          multiplier++;
+        }
+      });
+      payOut += (multiplier * card.cardPayout);
+      multiplier = 0;
+    } else if (card.cardKey.indexOf(diceValue) !== -1 && isTurn === true) {
       payOut += card.cardPayout;
     }
   });
@@ -116,12 +126,12 @@ CardBank.prototype.setStandardBank = function() {
     new Card([3], "Cafe", "red", 1, "cafe", 2),
     new Card([4], "Convenience Store", "green", 3, "store", 2),
     new Card([5], "Forest", "blue", 1, "cog", 3),
-    new Card([7], "Cheese Factory", "green", 3, "factory", 5),
-    new Card([8], "Furniture Factory", "green", 3, "factory", 3),
+    new Card([7], "Cheese Factory", "green", 3, "factory", 5, "cow"),
+    new Card([8], "Furniture Factory", "green", 3, "factory", 3, "cog"),
     new Card([9], "Mine", "blue", 5, "cog", 6),
     new Card([9,10], "Family Restaurant", "red", 2, "cafe", 3),
     new Card([10], "Apple Orchard", "blue", 3, "wheat", 3),
-    new Card([11,12], "Fruit Market", "green", 2, "factory", 2)
+    new Card([11,12], "Fruit Market", "green", 2, "factory", 2, "wheat")
   ];
 
   for (var i = 0; i < temp_arr.length; i++) {

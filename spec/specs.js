@@ -57,7 +57,7 @@ describe('Player', function() {
     testPlayer.getBluePayout(2);
     expect(testPlayer.purse).to.equal(4);
   });
-  it('has a method getGreenPayout that adds the right amount of payout for blue cards, only if isTurn is true', function(){
+  it('has a method getGreenPayout that adds the right amount of payout for greem cards, only if isTurn is true', function(){
     var testPlayer = new Player("Michaela");
     testPlayer.isTurn = true;
     var testCard = new Card([2], "Ranch", "green", 1, "cow", 1);
@@ -71,6 +71,30 @@ describe('Player', function() {
     testPlayer.isTurn = false;
     testPlayer.getGreenPayout(2);
     expect(testPlayer.purse).to.equal(4);
+  });
+  it('has a method getGreenPayout that adds the right amount of payout for green "factory" cards, only if isTurn is true', function(){
+    var testPlayer = new Player("Michaela");
+    testPlayer.isTurn = true;
+    var testFactoryCard = new Card([8], "Furniture Factory", "green", 3, "factory", 3, "cog");
+    var testFactory2Card = new Card([11,12], "Fruit Market", "green", 2, "factory", 2, "wheat");
+    var testCogCard = new Card([5], "Forest", "blue", 1, "cog", 3);
+    var testWheatCard = new Card([1], "Wheat Field", "blue", 1, "wheat", 1);
+    testPlayer.addCard(testCogCard);
+    testPlayer.addCard(testCogCard);
+    testPlayer.addCard(testFactoryCard);
+    testPlayer.purse = 0;
+    testPlayer.getGreenPayout(8);
+    expect(testPlayer.purse).to.equal(6);
+    testPlayer.addCard(testWheatCard);
+    testPlayer.addCard(testWheatCard);
+    testPlayer.addCard(testWheatCard);
+    testPlayer.purse = 0;
+    testPlayer.getGreenPayout(11);
+    expect(testPlayer.purse).to.equal(0);
+    testPlayer.addCard(testFactory2Card);
+    testPlayer.purse = 0;
+    testPlayer.getGreenPayout(11);
+    expect(testPlayer.purse).to.equal(6);
   });
 });
 describe('Dice', function() {
