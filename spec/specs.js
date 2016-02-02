@@ -171,12 +171,36 @@ describe('Game', function() {
     testGame.addPlayer(testPlayer2);
     expect(testGame.players[1].playerName).to.equal("Mao");
   });
-  // it('creates a Game object with the correct properties', function () {
-  //   var testGame = new Game();
-  //   expect(testGame.cardBank.length > 0).to.equal(true);
-  //   expect(testGame.player).to.eql([]);
-  //   expect(testGame.activePlayerIndex).to.equal(0);
-  // });
-  // test the add player method
-  // test the updateActivePlayerIndex method
+  it('has a method updateActivePlayerIndex that updates the activePlayerIndex', function () {
+    var testGame = new Game();
+    var testPlayer = new Player("Michaela");
+    var testPlayer2 = new Player("Bob");
+    var testPlayer3 = new Player("Steve");
+    testGame.addPlayer(testPlayer);
+    testGame.addPlayer(testPlayer2);
+    testGame.addPlayer(testPlayer3);
+    testGame.players[0].isTurn = true;
+    expect(testGame.players[0].isTurn).to.equal(true);
+    expect(testGame.activePlayerIndex).to.equal(0);
+    testGame.updateActivePlayerIndex();
+    expect(testGame.activePlayerIndex).to.equal(1);
+    expect(testGame.players[0].isTurn).to.equal(false);
+    expect(testGame.players[1].isTurn).to.equal(true);
+    testGame.updateActivePlayerIndex();
+    expect(testGame.activePlayerIndex).to.equal(2);
+    testGame.updateActivePlayerIndex();
+    expect(testGame.players[1].isTurn).to.equal(false);
+    expect(testGame.players[2].isTurn).to.equal(false);
+    expect(testGame.players[0].isTurn).to.equal(true);
+    expect(testGame.activePlayerIndex).to.equal(0);
+    testGame.updateActivePlayerIndex();
+    expect(testGame.activePlayerIndex).to.equal(1);
+  });
+  it('has a method canActivePlayerRollTwoDice that returns true or false if they can roll two dice', function() {
+    var testGame = new Game();
+    var testPlayer = new Player("Michaela");
+    expect(testGame.canActivePlayerRollTwoDice()).to.equal(false);
+    testPlayer.addLandmark("Train Station");
+    expect(testGame.canActivePlayerRollTwoDice()).to.equal(true);
+  })
 });

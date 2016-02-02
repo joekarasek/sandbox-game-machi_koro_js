@@ -177,10 +177,18 @@ Game.prototype.addPlayer = function(playerToAdd) {
 }
 // next turn method
 Game.prototype.updateActivePlayerIndex = function() {
+  this.players[this.activePlayerIndex].isTurn = false;
   if (this.activePlayerIndex < this.players.length-1) {
     this.activePlayerIndex ++;
   } else {
     this.activePlayerIndex = 0;
   }
+  this.players[this.activePlayerIndex].isTurn = true;
+}
+Game.prototype.canActivePlayerRollTwoDice = function() {
+  if (this.players[this.activePlayerIndex].landmarks[0].landmarkActive) {
+    return true;
+  }
+  return false;
 }
 // ??? method to determine who goes first
