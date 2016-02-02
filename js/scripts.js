@@ -2,6 +2,14 @@
 //     Game Logic
 // ===================================
 
+//Landmark Constructor//
+
+function Landmark(landmarkName, landmarkCost) {
+  this.landmarkName = landmarkName;
+  this.landmarkCost = landmarkCost;
+  this.landmarkActive = false;
+}
+
 // Card Constructor
 // ================
 function Card(cardKey, cardName, cardColor, cardPayout, cardType, cardCost) {

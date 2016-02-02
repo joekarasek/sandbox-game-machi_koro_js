@@ -1,3 +1,12 @@
+describe('Landmark', function(){
+  it('creates a landmark card with the correct properties', function() {
+    var testLandmark = new Landmark("Train Station", 4);
+    expect(testLandmark.landmarkName).to.equal("Train Station");
+    expect(testLandmark.landmarkCost).to.equal(4);
+    expect(testLandmark.landmarkActive).to.equal(false);
+  });
+});
+
 describe('Card', function() {
   // check the initial values
   it('creates a game card with the correct properties', function() {
