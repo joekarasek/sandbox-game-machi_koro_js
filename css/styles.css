@@ -85,6 +85,9 @@ h2 {
   text-align: center;
 }
 
+button[disabled] {
+  opacity: 0.1;
+}
 /*@media (min-width: 760px) {
   .card__row img {
     width: 100px;

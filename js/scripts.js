@@ -271,12 +271,18 @@ var populatePlayer = function(player, currentGame, count) {
   populatePlayerCards();
 
   // event handler for end turn button
-  // $('.button__end-turn').click(function() {
-  //   currentGame.updateActivePlayerIndex();
-  //   var target = "#player"+currentGame.activePlayerIndex;
-  //   $(target).css("background-color", "blue");
-  //
-  // });
+  $('.button__end-turn').last().click(function() {
+    disableRollButtons($('.button__roll1'),$('.button__roll2'));
+    var oldTarget = "#player"+currentGame.activePlayerIndex;
+    $(oldTarget).css("background-color", "white");
+    $(oldTarget+" .button__end-turn").prop("disabled", true);
+    currentGame.updateActivePlayerIndex();
+    var newTarget = "#player"+currentGame.activePlayerIndex;
+    $(newTarget).css("background-color", "#52A5D8");
+    $(newTarget+" .button__end-turn").prop("disabled", false);
+    enableRollButtons($(newTarget+" .button__roll1"), $(newTarget+" .button__roll2"));
+  });
+
   // event handler for rolling one dice
   $('.button__roll1').last().click(function() {
     currentGame.players[currentGame.activePlayerIndex].rollOneDie();
@@ -306,7 +312,6 @@ var populatePlayer = function(player, currentGame, count) {
       player.getBluePayout(dieValue);
     });
     currentGame.players[currentGame.activePlayerIndex].getGreenPayout(dieValue);
-    currentGame.updateActivePlayerIndex();
   });
   // event handler for roll one dice button
   //run check on all players for payouts
@@ -318,6 +323,10 @@ var populatePlayer = function(player, currentGame, count) {
 var disableRollButtons = function(button1, button2) {
   button1.prop('disabled', true);
   button2.prop('disabled', true);
+}
+var enableRollButtons = function(button1, button2) {
+  button1.prop('disabled', false);
+  button2.prop('disabled', false);
 }
 var populatePlayerCards = function() {
   // two arrays of card names for each row
