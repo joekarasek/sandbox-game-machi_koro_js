@@ -312,7 +312,7 @@ var populatePlayer = function(player, currentGame, count) {
     currentGame.players.forEach(function(player) {
       player.getBluePayout(dieValue);
     });
-    currentGame.players[currentGame.activePlayerIndex].getGreenPayout(dieValue);
+    currentGame.players[currentGame.activePlayerIndex].getGreenPayout(dieValue, currentGame);
   });
   //run function to update purse UIs
   // event handler for roll two dice button
