@@ -13,7 +13,7 @@ function Landmark(landmarkName, landmarkCost) {
 
 // Card Constructor
 // ================
-function Card(cardKey, cardName, cardColor, cardPayout, cardType, cardCost, cardMultiplier) {
+function Card(cardKey, cardName, cardColor, cardPayout, cardType, cardCost, cardMultiplier, cardURL) {
   this.cardKey = cardKey;
   this.cardName = cardName;
   this.cardColor = cardColor;
@@ -21,6 +21,7 @@ function Card(cardKey, cardName, cardColor, cardPayout, cardType, cardCost, card
   this.cardType = cardType;
   this.cardCost = cardCost;
   this.cardMultiplier = cardMultiplier; //is a string equal to cardType that multiplies
+  this.cardURL = cardURL;
 }
 
 
@@ -43,8 +44,8 @@ Dice.prototype.roll = function() {
 function Player(playerName) {
   this.playerName = playerName;
   this.cardStack = [
-    new Card([1], "Wheat Field", "blue", 1, "wheat", 1),
-    new Card([2,3], "Bakery", "green", 1, "store", 1)
+    new Card([1], "Wheat Field", "blue", 1, "wheat", 1, 0, "img/wheat1.jpg"),
+    new Card([2,3], "Bakery", "green", 1, "store", 1, 0, "img/bakery2-3.jpg")
     ];
   this.purse = 3;
   this.landmarks = [
@@ -159,18 +160,18 @@ CardBank.prototype.removeCard = function(cardNameToRemove) {
 
 CardBank.prototype.setStandardBank = function() {
   var temp_arr = [
-    new Card([1], "Wheat Field", "blue", 1, "wheat", 1),
-    new Card([2,3], "Bakery", "green", 1, "store", 1),
-    new Card([2], "Ranch", "blue", 1, "cow", 1),
-    new Card([3], "Cafe", "red", 1, "cafe", 2),
-    new Card([4], "Convenience Store", "green", 3, "store", 2),
-    new Card([5], "Forest", "blue", 1, "cog", 3),
-    new Card([7], "Cheese Factory", "green", 3, "factory", 5, "cow"),
-    new Card([8], "Furniture Factory", "green", 3, "factory", 3, "cog"),
-    new Card([9], "Mine", "blue", 5, "cog", 6),
-    new Card([9,10], "Family Restaurant", "red", 2, "cafe", 3),
-    new Card([10], "Apple Orchard", "blue", 3, "wheat", 3),
-    new Card([11,12], "Fruit Market", "green", 2, "factory", 2, "wheat")
+    new Card([1], "Wheat Field", "blue", 1, "wheat", 1, '', 'img/wheat1.jpg'),
+    new Card([2,3], "Bakery", "green", 1, "store", 1, '', 'img/bakery2-3.jpg'),
+    new Card([2], "Ranch", "blue", 1, "cow", 1, '', 'img/ranch2.jpg'),
+    new Card([3], "Cafe", "red", 1, "cafe", 2, '', 'img/cafe3.jpg'),
+    new Card([4], "Convenience Store", "green", 3, "store", 2, '', 'img/convenience4.jpg'),
+    new Card([5], "Forest", "blue", 1, "cog", 3, '', 'img/forest5.jpg'),
+    new Card([7], "Cheese Factory", "green", 3, "factory", 5, "cow", 'img/cheese7.jpg'),
+    new Card([8], "Furniture Factory", "green", 3, "factory", 3, "cog", 'img/furniture8.jpg'),
+    new Card([9], "Mine", "blue", 5, "cog", 6, '', 'img/mine9.jpg'),
+    new Card([9,10], "Family Restaurant", "red", 2, "cafe", 3, '', 'img/family9-10.jpg'),
+    new Card([10], "Apple Orchard", "blue", 3, "wheat", 3, '', 'img/apple10.jpg'),
+    new Card([11,12], "Fruit Market", "green", 2, "factory", 2, "wheat", 'img/fruit11-12.jpg')
   ];
 
   for (var i = 0; i < temp_arr.length; i++) {
@@ -266,6 +267,7 @@ var populatePlayer = function(player) {
       '</div>'+
     '</div>'
   );
+  populatePlayerCards();
   // event handler for roll one dice button
   //run check on all players for payouts
   //run function to update purse UIs
@@ -273,13 +275,41 @@ var populatePlayer = function(player) {
   //run check on all players for payouts
   //run function to update purse UIs
 }
-// var populateCard = function(card) {
-//   <div class="col-xs-2 card">
-//     <p><span class="card__name">Card1</span></p>
-//     <img class="js__not-owned" src="img/forest.jpg" alt="card Image">
-//     <p class="card__quantity">No Cards</p>
-//   </div>
-// }
+var populatePlayerCards = function() {
+  // two arrays of card names for each row
+  var rowOneCardURLs = [
+    "wheat1",
+    "bakery2-3",
+    "ranch2",
+    "cafe3",
+    "convenience4",
+    "forest5"
+  ];
+  var rowTwoCardURLs = [
+    "cheese7",
+    "furniture8",
+    "mine9",
+    "family9-10",
+    "apple10",
+    "fruit11-12"
+  ];
+  // two 6 long loops to poputate each row
+  rowOneCardURLs.forEach(function(cardURL) {
+    $('.player').last().find('.card__row').first().append('<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/'+cardURL+'.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity">No Cards</p>'+
+                            '</div>'
+    );
+  });
+  rowTwoCardURLs.forEach(function(cardURL) {
+    $('.player').last().find('.card__row').last().append('<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/'+cardURL+'.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity">No Cards</p>'+
+                            '</div>'
+    );
+  });
+
+}
 
 // populate a player div
 // show available/purchased cards
