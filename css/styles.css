@@ -24,7 +24,7 @@ h1, h2, h3, #exitIntroButton {
 
 }
 /*index main game*/
-.main_game_div {
+.game__board {
   display: none;
 }
 .header {
@@ -52,7 +52,7 @@ h1, h2, h3, #exitIntroButton {
   border-radius: 3px;
 }
 /*player creation page*/
-.player_page {
+.player_creation {
   display: none;
 }
 .player_rules{
