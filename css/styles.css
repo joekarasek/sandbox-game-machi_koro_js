@@ -3,9 +3,18 @@
 }
 
 .main_game_div {
-  display: none;
+  /*display: none;*/
 }
 
 .player_creation {
   display: none;
+}
+
+.player, .card {
+  border: solid black 1px;
+  border-radius: 3px;
+}
+
+.js__not-owned {
+  opacity: .25;
 }
