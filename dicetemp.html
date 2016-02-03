@@ -1,0 +1,15 @@
+// update display of scores
+var jQueryPointer = '#' + activePlayer.playerID;
+$(jQueryPointer + " p.roll-score").text("Current Roll: " + activePlayer.dice.diceValue);
+$(jQueryPointer + " p.turn-score").text("Score This Turn: " + activePlayer.turnScore);
+$(jQueryPointer + " .die-pic1").attr("src", activePlayer.dice.dieOneImgAddress);
+$(jQueryPointer + " .die-pic2").attr("src", activePlayer.dice.dieTwoImgAddress);
+
+<div class="row die-pics">
+ <div class="col-xs-6">
+   <img class='die-pic1' src='img/5.png' alt="picture of die face">
+ </div>
+ <div class="col-xs-6">
+   <img class='die-pic2' src='img/4.png' alt="picture of die face">
+ </div>
+</div>

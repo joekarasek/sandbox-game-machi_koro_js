@@ -241,7 +241,7 @@ var hideAndShowDivs = function(divToHide, divToShow) {
   $(divToHide).hide();
   $(divToShow).show();
 }
-var populatePlayer = function(player) {
+var populatePlayer = function(player, currentGame) {
   $('.main_game_div').append('<div class="player">'+
       '<div class="row player__info">'+
         '<div class="col-md-4">'+
@@ -268,6 +268,20 @@ var populatePlayer = function(player) {
     '</div>'
   );
   populatePlayerCards();
+  $('.button__roll1').click(function() {
+    currentGame.players[currentGame.activePlayerIndex].rollOneDie();
+    // update display of scores
+    $(".die-pic1").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieOneImgAddress);
+    //change this line to make the second dice clear
+    // $(".die-pic2").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieTwoImgAddress);
+  });
+  $('.button__roll2').click(function() {
+    currentGame.players[currentGame.activePlayerIndex].rollTwoDie();
+    // update display of scores
+    $(".die-pic1").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieOneImgAddress);
+    //change this line to make the second dice clear
+    $(".die-pic2").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieTwoImgAddress);
+  });
   // event handler for roll one dice button
   //run check on all players for payouts
   //run function to update purse UIs
@@ -338,7 +352,7 @@ $(document).ready(function() {
     hideAndShowDivs(".player_creation", ".main_game_div");
     console.log(currentGame);
     currentGame.players.forEach(function(player) {
-      populatePlayer(player);
+      populatePlayer(player, currentGame);
     });
   });
 

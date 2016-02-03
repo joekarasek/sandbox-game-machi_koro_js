@@ -30,10 +30,17 @@ h2 {
 .card__row div {
   text-align: center;
 }
+
 @media (min-width: 760px) {
   .card__row img {
     width: 100px;
   }
-
-
+  .game__board {
+    float: left;
+    width: 25%;
+  }
+  .game__players {
+    float: right;
+    width: 75%;
+  }
 }
