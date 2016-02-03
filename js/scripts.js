@@ -2,8 +2,8 @@
 //     Game Logic
 // ===================================
 
-//Landmark Constructor//
-
+// Landmark Constructors
+// ====================
 function Landmark(landmarkName, landmarkCost) {
   this.landmarkName = landmarkName;
   this.landmarkCost = landmarkCost;
@@ -38,7 +38,6 @@ Dice.prototype.roll = function() {
 }
 
 
-
 // Player Constructor
 //===================
 function Player(playerName) {
@@ -46,14 +45,14 @@ function Player(playerName) {
   this.cardStack = [
     new Card([1], "Wheat Field", "blue", 1, "wheat", 1),
     new Card([2,3], "Bakery", "green", 1, "store", 1)
-  ];
+    ];
   this.purse = 3;
   this.landmarks = [
     new Landmark("Train Station", 4),
     new Landmark("Shopping Mall", 10),
     new Landmark("Amusement Park", 16),
     new Landmark("Radio Tower", 22)
-  ];
+    ];
   this.isTurn = false;
   this.dice = new Dice();
 }
@@ -77,7 +76,6 @@ Player.prototype.landmarkTrue = function(landmark) {
     }
   });
 }
-
 Player.prototype.getBluePayout = function(diceValue) {
   var payOut = 0;
   this.cardStack.forEach(function(card) {
@@ -125,17 +123,13 @@ Player.prototype.giveRedPayout = function(playerToPay, amountToPay) {
     this.purse = 0;
   }
 }
-
 Player.prototype.hasWon = function() {
   if (this.landmarks[0].landmarkActive && this.landmarks[1].landmarkActive && this.landmarks[2].landmarkActive && this.landmarks[3].landmarkActive) {
     return true;
   }
   return false;
 }
-// Player.prototype.endTurn = function() {
-//   this.turn = false;
-//
-// }
+
 // CardBank Constructor
 //=====================
 function CardBank() {
@@ -232,18 +226,33 @@ var addNewPlayerToGame = function(game) {
     alert("This game is shitty with more than 4 people.");
     return;
   }
-  game.addPlayer(new Player( $('form#playerSetup input').val() ) );
+  var newPlayer = new Player( $('form#playerSetup input').val());
+  game.addPlayer(newPlayer);
   $('#playerList').append('<li>'+$('form#playerSetup input').val()+'</li>');
   $('form#playerSetup input').val('');
   $('form#playerSetup input').focus();
   if (game.players.length >=2) {
     $('#startGameButton').show();
   }
+  return newPlayer;
 }
 var hideAndShowDivs = function(divToHide, divToShow) {
   $(divToHide).hide();
   $(divToShow).show();
 }
+var populatePlayer = function(player) {
+  $('.main_game_div').append('<p>'+player.playerName+'</p>');
+  // event handler for roll one dice button
+  //run check on all players for payouts
+  //run function to update purse UIs
+
+
+  // event handler for roll two dice button
+  //run check on all players for payouts
+  //run function to update purse UIs
+}
+
+// populate a player div
 // show available/purchased cards
 // hide unavailable cards
 // highlight active players div
@@ -262,7 +271,9 @@ $(document).ready(function() {
 
   $('form#playerSetup').submit(function(event) {
     event.preventDefault();
-    addNewPlayerToGame(currentGame);
+    var playerToAdd = addNewPlayerToGame(currentGame);
+    populatePlayer(playerToAdd);
+    // run populate player function, pass in playerToAdd
   });
 
   $('#startGameButton').click(function() {
@@ -270,16 +281,11 @@ $(document).ready(function() {
     console.log(currentGame);
   });
 
-  // event handler for roll one dice button
-
-
-  // event handler for roll two dice button
-
-
-  // event handler for click on bank card, will remove from bank and add to player, if player can afford it, end turn if successful
+  // event handler for click on bank card, will remove from bank and add to player, update UI, if player can afford it, end turn if successful
 
   // event handler for button end turn without purchase
 
-  //event handler for purchasing landmark
+  //event handler for purchasing landmark, ends turn
       //include a check for winner
+
 });
