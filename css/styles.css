@@ -6,10 +6,19 @@
   display: none;
 }
 
-.player_creation {
+.player_page {
   display: none;
 }
-
+.player_rules{
+  border: solid blue 2px;
+  font-size: 25px;
+  margin: 10%;
+  padding: 2%;
+}
+.player_rules h2 {
+  text-decoration: underline;
+  
+}
 .player, .card {
   border: solid black 1px;
   border-radius: 3px;
