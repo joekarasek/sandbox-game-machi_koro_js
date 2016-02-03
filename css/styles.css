@@ -1,9 +1,27 @@
-h1, h2, h3 {
+h1, h2, h3, #exitIntroButton {
   font-family: 'Unkempt', cursive;
 }
 /*index intro screen*/
 #startGameButton {
   display: none;
+}
+.intro_screen h1 {
+  text-align: center;
+  font-size: 60px;
+  font-weight: bolder;
+}
+.intro_screen {
+  text-align: center;
+}
+.intro_screen img {
+  max-width: 100%;
+  padding: 2%;
+}
+#exitIntroButton {
+  font-size: 45px;
+  padding: 2%;
+  border-radius: 20%;
+
 }
 /*index main game*/
 .main_game_div {
@@ -32,7 +50,7 @@ h1, h2, h3 {
   display: none;
 }
 .player_rules{
-  border: solid blue 2px;
+  border: solid #33ccff 10px;
   font-size: 25px;
   margin: 10%;
   padding: 2%;
@@ -40,7 +58,10 @@ h1, h2, h3 {
 .player_rules h2 {
   text-decoration: underline;
 }
-
+.well {
+  background:#d6f5f5;
+  color: #003d66;
+}
 /*populate card JS*/
 .js__not-owned {
   opacity: .25;

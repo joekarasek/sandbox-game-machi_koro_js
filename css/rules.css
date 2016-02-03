@@ -1,5 +1,5 @@
 .container {
-  border: solid blue 2px;
+  border: solid #33ccff 10px;
   font-size: 25px;
   margin: 10%;
   padding: 2%;
@@ -8,4 +8,12 @@
 h2 {
   text-decoration: underline;
   font-family: 'Unkempt', cursive;
+}
+.well {
+  background:#d6f5f5;
+  color: #003d66;
+}
+img {
+  max-width: 100%;
+  padding: 2%;
 }
