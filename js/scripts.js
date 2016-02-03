@@ -241,16 +241,45 @@ var hideAndShowDivs = function(divToHide, divToShow) {
   $(divToShow).show();
 }
 var populatePlayer = function(player) {
-  $('.main_game_div').append('<p>'+player.playerName+'</p>');
+  $('.main_game_div').append('<div class="player">'+
+      '<div class="row player__info">'+
+        '<div class="col-md-4">'+
+          '<h2 class="player__name">'+player.playerName+'</h2>'+
+        '</div>'+
+        '<div class="col-md-4">'+
+          '<h2 class="player__landmarks">Landmarks</h2>'+
+        '</div>'+
+        '<div class="col-md-4">'+
+          '<h2 class="player__coins">Coins: '+player.purse+'</h2>'+
+        '</div>'+
+      '</div>'+
+      '<div class="player__cards">'+
+        '<div class="row card__row">'+
+        '</div>'+
+        '<div class="row card__row">'+
+        '</div>'+
+      '</div>'+
+      '<div class="player__buttons">'+
+        '<button class="button__roll1">Roll 1</button>'+
+        '<button class="button__roll2">Roll 2</button>'+
+        '<button class="button__end-turn">End Turn Without Purchase</button>'+
+      '</div>'+
+    '</div>'
+  );
   // event handler for roll one dice button
   //run check on all players for payouts
   //run function to update purse UIs
-
-
   // event handler for roll two dice button
   //run check on all players for payouts
   //run function to update purse UIs
 }
+// var populateCard = function(card) {
+//   <div class="col-xs-2 card">
+//     <p><span class="card__name">Card1</span></p>
+//     <img class="js__not-owned" src="img/forest.jpg" alt="card Image">
+//     <p class="card__quantity">No Cards</p>
+//   </div>
+// }
 
 // populate a player div
 // show available/purchased cards
@@ -272,13 +301,15 @@ $(document).ready(function() {
   $('form#playerSetup').submit(function(event) {
     event.preventDefault();
     var playerToAdd = addNewPlayerToGame(currentGame);
-    populatePlayer(playerToAdd);
     // run populate player function, pass in playerToAdd
   });
 
   $('#startGameButton').click(function() {
     hideAndShowDivs(".player_creation", ".main_game_div");
     console.log(currentGame);
+    currentGame.players.forEach(function(player) {
+      populatePlayer(player);
+    });
   });
 
   // event handler for click on bank card, will remove from bank and add to player, update UI, if player can afford it, end turn if successful

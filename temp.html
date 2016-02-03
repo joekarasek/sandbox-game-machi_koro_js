@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -13,12 +13,12 @@
   	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
   	<!-- my css and js -->
-  	<link rel="stylesheet" href="css/styles.css">
+  	<!-- <link rel="stylesheet" href="css/styles.css">
   	<script type="text/javascript" src="js/scripts.js"></script>
   </head>
   <body>
     <div class="container"> <!--Start/end main container div-->
-      <div class="dice">
+      <!-- <div class="dice">
       </div>
       <div class="row playerInfoRow">  <!-- start/end player info row-->
         <div class="col-md-4">
@@ -26,10 +26,10 @@
         <div class="col-md-4">
         </div>
         <div class="col-md-4">
-        </div>
+        </div> --> -->
       </div> <!-- start/end player info row-->
       <div class="row cardRow"><!-- start/end card Row-->
-        <div class="col-md-1">
+        <!-- <div class="col-md-1">
         </div>
         <div class="col-md-1">
         </div>
@@ -53,7 +53,7 @@
         </div>
         <div class="col-md-1">
         </div>
-        <div class="col-md-1">
+        <div class="col-md-1"> -->
         </div>
       </div><!-- start/end card Row-->
       <div class="row row3">
@@ -74,80 +74,100 @@
           <h2 class="player__coins">Coins</h2>
         </div>
       </div>
-      <div class="player__cards">
+      <div class="player__cards"> -->
         <!-- (.row.cards__row>.col-md-2*6)*2 -->
         <!-- (.row.card__row>(.col-md-2.card>(p>span.card__name)+img[href="#"][alt="card Image"]+(p>span.card__quantity))*6)*2 -->
-        <div class="row card__row">
-          <div class="col-md-2 card">
-            <p><span class="card__name">Card1</span></p>
-            <img src="#" alt="card Image">
-            <p class="card__quantity">No Cards</p>
-          </div>
-          <div class="col-md-2 card">
-            <p><span class="card__name">Card2</span></p>
-            <img src="#" alt="card Image">
-            <p class="card__quantity">No Cards</p>
-          </div>
-          <div class="col-md-2 card">
-            <p><span class="card__name">Card3</span></p>
-            <img src="#" alt="card Image">
-            <p class="card__quantity">No Cards</p>
-          </div>
-          <div class="col-md-2 card">
-            <p><span class="card__name">Card4</span></p>
-            <img src="#" alt="card Image">
-            <p class="card__quantity">No Cards</p>
-          </div>
-          <div class="col-md-2 card">
-            <p><span class="card__name">Card5</span></p>
-            <img src="#" alt="card Image">
-            <p class="card__quantity">No Cards</p>
-          </div>
-          <div class="col-md-2 card">
-            <p><span class="card__name">Card6</span></p>
-            <img src="#" alt="card Image">
-            <p class="card__quantity">No Cards</p>
-          </div>
-        </div>
-        <div class="row card__row">
-          <div class="col-md-2 card">
-            <p><span class="card__name">Card1</span></p>
-            <img src="#" alt="card Image">
-            <p class="card__quantity">No Cards</p>
-          </div>
-          <div class="col-md-2 card">
-            <p><span class="card__name">Card2</span></p>
-            <img src="#" alt="card Image">
-            <p class="card__quantity">No Cards</p>
-          </div>
-          <div class="col-md-2 card">
-            <p><span class="card__name">Card3</span></p>
-            <img src="#" alt="card Image">
-            <p class="card__quantity">No Cards</p>
-          </div>
-          <div class="col-md-2 card">
-            <p><span class="card__name">Card4</span></p>
-            <img src="#" alt="card Image">
-            <p class="card__quantity">No Cards</p>
-          </div>
-          <div class="col-md-2 card">
-            <p><span class="card__name">Card5</span></p>
-            <img src="#" alt="card Image">
-            <p class="card__quantity">No Cards</p>
-          </div>
-          <div class="col-md-2 card">
-            <p><span class="card__name">Card6</span></p>
-            <img src="#" alt="card Image">
-            <p class="card__quantity">No Cards</p>
-          </div>
-        </div>
-      </div>
-      <div class="player__buttons">
-        <button class="button__roll1">Roll 1</button>
-        <button class="button__roll2">Roll 2</button>
-        <button class="button__end-turn">End</button>
 
-      </div>
+      <!-- </div>
     </div>
   </body>
-</html>
+</html> -->
+
+
+<div class="player">
+  <div class="row player__info">
+    <div class="col-md-4">
+      <h2 class="player__name">Player Name</h2>
+    </div>
+    <div class="col-md-4">
+      <h2 class="player__landmarks">Landmarks</h2>
+    </div>
+    <div class="col-md-4">
+      <h2 class="player__coins">Coins</h2>
+    </div>
+  </div>
+  <div class="player__cards">
+    <!-- (.row.cards__row>.col-md-2*6)*2 -->
+    <!-- (.row.card__row>(.col-md-2.card>(p>span.card__name)+img[href="#"][alt="card Image"]+(p>span.card__quantity))*6)*2 -->
+    <div class="row card__row">
+      <div class="col-xs-2 card">
+        <p><span class="card__name">Card1</span></p>
+        <img class="js__not-owned" src="img/forest.jpg" alt="card Image">
+        <p class="card__quantity">No Cards</p>
+      </div>
+      <div class="col-xs-2 card">
+        <p><span class="card__name">Card2</span></p>
+        <img src="#" alt="card Image">
+        <p class="card__quantity">No Cards</p>
+      </div>
+      <div class="col-xs-2 card">
+        <p><span class="card__name">Card3</span></p>
+        <img src="#" alt="card Image">
+        <p class="card__quantity">No Cards</p>
+      </div>
+      <div class="col-xs-2 card">
+        <p><span class="card__name">Card4</span></p>
+        <img src="#" alt="card Image">
+        <p class="card__quantity">No Cards</p>
+      </div>
+      <div class="col-xs-2 card">
+        <p><span class="card__name">Card5</span></p>
+        <img src="#" alt="card Image">
+        <p class="card__quantity">No Cards</p>
+      </div>
+      <div class="col-xs-2 card">
+        <p><span class="card__name">Card6</span></p>
+        <img src="#" alt="card Image">
+        <p class="card__quantity">No Cards</p>
+      </div>
+    </div>
+    <div class="row card__row">
+      <div class="col-xs-2 card">
+        <p><span class="card__name">Card1</span></p>
+        <img src="#" alt="card Image">
+        <p class="card__quantity">No Cards</p>
+      </div>
+      <div class="col-xs-2 card">
+        <p><span class="card__name">Card2</span></p>
+        <img src="#" alt="card Image">
+        <p class="card__quantity">No Cards</p>
+      </div>
+      <div class="col-xs-2 card">
+        <p><span class="card__name">Card3</span></p>
+        <img src="#" alt="card Image">
+        <p class="card__quantity">No Cards</p>
+      </div>
+      <div class="col-xs-2 card">
+        <p><span class="card__name">Card4</span></p>
+        <img src="#" alt="card Image">
+        <p class="card__quantity">No Cards</p>
+      </div>
+      <div class="col-xs-2 card">
+        <p><span class="card__name">Card5</span></p>
+        <img src="#" alt="card Image">
+        <p class="card__quantity">No Cards</p>
+      </div>
+      <div class="col-xs-2 card">
+        <p><span class="card__name">Card6</span></p>
+        <img src="#" alt="card Image">
+        <p class="card__quantity">No Cards</p>
+      </div>
+    </div>
+  </div>
+  <div class="player__buttons">
+    <button class="button__roll1">Roll 1</button>
+    <button class="button__roll2">Roll 2</button>
+    <button class="button__end-turn">End Turn Without Purchase</button>
+
+  </div>
+</div>
