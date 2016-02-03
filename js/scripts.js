@@ -273,13 +273,14 @@ var populatePlayer = function(player, currentGame) {
     // update display of scores
     $(".die-pic1").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieOneImgAddress);
     //change this line to make the second dice clear
-    // $(".die-pic2").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieTwoImgAddress);
+    $(".die-pic2").css("opacity", "0.2");
   });
   $('.button__roll2').click(function() {
     currentGame.players[currentGame.activePlayerIndex].rollTwoDie();
     // update display of scores
     $(".die-pic1").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieOneImgAddress);
     //change this line to make the second dice clear
+    $(".die-pic2").css("opacity", "1");
     $(".die-pic2").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieTwoImgAddress);
   });
   // event handler for roll one dice button
