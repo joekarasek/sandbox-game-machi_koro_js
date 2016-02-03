@@ -1,23 +1,48 @@
-<h2>Machi Koro Rules</h2>
-<p>Each player starts with two establishments (one Wheat Field and one Bakery).
-<br>
-You will also have four Landmark cards (Train Station, Shopping Mall, Amusement Park, Radio Tower) that will be under construction.</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Machi Koro Rules</title>
 
-<h2>GAME FLOW</h2>
-<p>A turn consists of the following three phases:
-<br>
-Roll Dice: to begin their turn a player rolls the dice. When rolling two dice, the dice are always summed together.
-<br>
-Earn Income: Players earn income based on the dice roll and the effects of the Establishments that they own that match the dice roll.
-There are 3 different types of establishments:
-<br>
-BLUE: Get income from the bank on ANYONE'S turn.
-GREEN: Get income from the bank ONLY on your turn.
-RED: Take coins from the person that rolled the dice. As long as that person has coins to give.
-<br>
-**If you own multiple copies of a single Establishment, the effects are multiplied by the number of Establishments of that type owned.
-<br>
-Construction:
-Buy Establishments or Landmarks from the marketplace after you rolled the dice and earn and/or give income. You can only buy one Establishment or Landmark on your turn. Or you may choose to end your turn.
-<br>
-Game End: The player to construct all four of their Landmarks first wins the game!</p>
+  	<!-- jquery-2.2.0 -->
+  	<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+
+  	<!-- bootstrap w/ optional theme -->
+  	<link rel="stylesheet" href="css/bootstrap.min.css">
+  	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+  	<!-- my css and js -->
+  	<link rel="stylesheet" href="css/rules.css">
+  	<script type="text/javascript" src="js/scripts.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Machi Koro Rules</h2>
+      <p>Each player starts with two establishments (one Wheat Field and one Bakery) and 3 coins.
+      <br>
+      You will also have four Landmark cards (Train Station, Shopping Mall, Amusement Park, Radio Tower) that will be under construction.</p>
+
+      <h2>Game Flow</h2>
+      <ul>A turn consists of the following three phases:
+        <br>
+        <br>
+        <li><strong>Roll Dice:</strong> to begin their turn a player rolls the dice. When rolling two dice, the dice are always summed together.</li>
+        <br>
+        <li><strong>Earn Income:</strong> Players earn income based on the dice roll and the effects of the Establishments that they own that match the dice roll.</li>
+          <ul>There are 3 different types of establishments:
+          <li>BLUE: Get income from the bank on ANYONE'S turn.</li>
+          <li>GREEN: Get income from the bank ONLY on your turn.</li>
+          <li>RED: Take coins from the person that rolled the dice. As long as that person has coins to give.</li>
+          </ul>
+          <p>**If you own multiple copies of a single Establishment, the effects are multiplied by the number of Establishments of that type owned.</p>
+        <br>
+        <li><strong>Construction:</strong>
+        Buy Establishments or Landmarks from the marketplace after you rolled the dice and earn and/or give income. You can only buy one Establishment or Landmark on your turn. Or you may choose to end your turn.</li>
+        <br>
+      <p>Game End: The player to construct all four of their Landmarks first wins the game!</p>
+    </div>
+    </div>
+  </body>
+</html>

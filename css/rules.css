@@ -1,0 +1,10 @@
+.container {
+  border: solid blue 2px;
+  font-size: 25px;
+  margin: 10%;
+  padding: 2%;
+  width: auto;
+}
+h2 {
+  text-decoration: underline;
+}
