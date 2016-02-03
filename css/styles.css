@@ -1,3 +1,6 @@
+h1, h2, h3 {
+  font-family: 'Unkempt', cursive;
+}
 /*index intro screen*/
 #startGameButton {
   display: none;
@@ -10,6 +13,10 @@
 .rule_link {
   float: right;
   display: none;
+  font: #3366cc;
+  font-family: 'Unkempt', cursive;
+  font-size: 35px;
+  font-weight: bold;
 }
 
 /*scripts append main game */
