@@ -274,6 +274,9 @@ var populatePlayer = function(player, currentGame) {
     $(".die-pic1").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieOneImgAddress);
     //change this line to make the second dice clear
     $(".die-pic2").css("opacity", "0.2");
+    // disable further rolls
+    disableRollButtons($('.button__roll1'),$('.button__roll2'));
+    // run payouts
   });
   $('.button__roll2').click(function() {
     currentGame.players[currentGame.activePlayerIndex].rollTwoDie();
@@ -282,6 +285,9 @@ var populatePlayer = function(player, currentGame) {
     //change this line to make the second dice clear
     $(".die-pic2").css("opacity", "1");
     $(".die-pic2").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieTwoImgAddress);
+    // disable further rolls
+    disableRollButtons($('.button__roll1'),$('.button__roll2'));
+    // run payouts
   });
   // event handler for roll one dice button
   //run check on all players for payouts
@@ -289,6 +295,10 @@ var populatePlayer = function(player, currentGame) {
   // event handler for roll two dice button
   //run check on all players for payouts
   //run function to update purse UIs
+}
+var disableRollButtons = function(button1, button2) {
+  button1.prop('disabled', true);
+  button2.prop('disabled', true);
 }
 var populatePlayerCards = function() {
   // two arrays of card names for each row
