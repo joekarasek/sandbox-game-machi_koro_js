@@ -240,8 +240,10 @@ var hideAndShowDivs = function(divToHide, divToShow) {
   $(divToHide).hide();
   $(divToShow).show();
 }
-var populatePlayer = function(player, currentGame) {
-  $('.main_game_div').append('<div class="player">'+
+var populatePlayer = function(player, currentGame, count) {
+  $('.main_game_div').append('<div class="player" id="player'+
+      count+
+      '">'+
       '<div class="row player__info">'+
         '<div class="col-md-4">'+
           '<h2 class="player__name">'+player.playerName+'</h2>'+
@@ -262,26 +264,35 @@ var populatePlayer = function(player, currentGame) {
       '<div class="player__buttons">'+
         '<button class="button__roll1">Roll 1</button>'+
         '<button class="button__roll2">Roll 2</button>'+
-        '<button class="button__end-turn">End Turn Without Purchase</button>'+
+        '<button class="button__end-turn">End Turn</button>'+
       '</div>'+
     '</div>'
   );
   populatePlayerCards();
+
+  // event handler for end turn button
+  // $('.button__end-turn').click(function() {
+  //   currentGame.updateActivePlayerIndex();
+  //   var target = "#player"+currentGame.activePlayerIndex;
+  //   $(target).css("background-color", "blue");
+  //
+  // });
+  // event handler for rolling one dice
   $('.button__roll1').last().click(function() {
     currentGame.players[currentGame.activePlayerIndex].rollOneDie();
     // update display of dice
     $(".die-pic1").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieOneImgAddress);
     $(".die-pic2").css("opacity", "0.2");
     // disable further rolls
-    // disableRollButtons($('.button__roll1'),$('.button__roll2'));
     // run payouts
     var dieValue = currentGame.players[currentGame.activePlayerIndex].dice.dieOne;
     currentGame.players[currentGame.activePlayerIndex].getGreenPayout(dieValue, currentGame);
     currentGame.players.forEach(function(playerToPayout) {
       playerToPayout.getBluePayout(dieValue);
     });
-    currentGame.updateActivePlayerIndex();
+    disableRollButtons($('.button__roll1'),$('.button__roll2'));
   });
+  // event handler for rolling two dice
   $('.button__roll2').last().click(function() {
     var dieValue = currentGame.players[currentGame.activePlayerIndex].rollTwoDie();
     // update display of dice
@@ -295,7 +306,6 @@ var populatePlayer = function(player, currentGame) {
       player.getBluePayout(dieValue);
     });
     currentGame.players[currentGame.activePlayerIndex].getGreenPayout(dieValue);
-    console.log(currentGame.players[currentGame.activePlayerIndex].purse);
     currentGame.updateActivePlayerIndex();
   });
   // event handler for roll one dice button
@@ -370,8 +380,10 @@ $(document).ready(function() {
   $('#startGameButton').click(function() {
     hideAndShowDivs(".player_creation", ".game__board");
     console.log(currentGame);
+    var count = 0;
     currentGame.players.forEach(function(player) {
-      populatePlayer(player, currentGame);
+      populatePlayer(player, currentGame, count);
+      count++;
     });
   });
   // $('#startGameButton').click(function() {
