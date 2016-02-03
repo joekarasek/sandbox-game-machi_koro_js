@@ -86,14 +86,13 @@ Player.prototype.getBluePayout = function(diceValue) {
   });
   this.purse += payOut;
 }
-Player.prototype.getGreenPayout = function(diceValue) {
-  console.log("getGreenPayout triggered!");
+Player.prototype.getGreenPayout = function(diceValue, currentGame) {
   var payOut = 0;
-  var thisPlayer = this;
   var multiplier = 0;
+  var that = this;
   this.cardStack.forEach(function(card) {
     if (card.cardMultiplier !== '' && card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "green") {
-      thisPlayer.cardStack.forEach(function(card2) {
+      that.cardStack.forEach(function(card2) {
         if (card.cardMultiplier === card2.cardType) {
           multiplier++;
         }
@@ -104,7 +103,7 @@ Player.prototype.getGreenPayout = function(diceValue) {
       payOut += card.cardPayout;
     }
   });
-  this.purse += payOut;
+  currentGame.players[currentGame.activePlayerIndex].purse += payOut;
 }
 Player.prototype.requestRedPayout = function(){
   var requestedAmount = 0;
@@ -198,13 +197,13 @@ Game.prototype.addPlayer = function(playerToAdd) {
 }
 // next turn method
 Game.prototype.updateActivePlayerIndex = function() {
-  this.players[this.activePlayerIndex].isTurn = false;
+  // this.players[this.activePlayerIndex].isTurn = false;
   if (this.activePlayerIndex < this.players.length-1) {
     this.activePlayerIndex ++;
   } else {
     this.activePlayerIndex = 0;
   }
-  this.players[this.activePlayerIndex].isTurn = true;
+  // this.players[this.activePlayerIndex].isTurn = true;
 }
 Game.prototype.canActivePlayerRollTwoDice = function() {
   if (this.players[this.activePlayerIndex].landmarks[0].landmarkActive) {
@@ -277,12 +276,11 @@ var populatePlayer = function(player, currentGame) {
     // disableRollButtons($('.button__roll1'),$('.button__roll2'));
     // run payouts
     var dieValue = currentGame.players[currentGame.activePlayerIndex].dice.dieOne;
-    currentGame.players[currentGame.activePlayerIndex].getGreenPayout(dieValue);
+    currentGame.players[currentGame.activePlayerIndex].getGreenPayout(dieValue, currentGame);
     currentGame.players.forEach(function(playerToPayout) {
       playerToPayout.getBluePayout(dieValue);
     });
-    // console.log(currentGame.players[currentGame.activePlayerIndex].purse);
-
+    currentGame.updateActivePlayerIndex();
   });
   $('.button__roll2').last().click(function() {
     var dieValue = currentGame.players[currentGame.activePlayerIndex].rollTwoDie();
@@ -298,6 +296,7 @@ var populatePlayer = function(player, currentGame) {
     });
     currentGame.players[currentGame.activePlayerIndex].getGreenPayout(dieValue);
     console.log(currentGame.players[currentGame.activePlayerIndex].purse);
+    currentGame.updateActivePlayerIndex();
   });
   // event handler for roll one dice button
   //run check on all players for payouts
