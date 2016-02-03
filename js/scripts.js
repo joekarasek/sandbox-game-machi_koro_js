@@ -300,6 +300,7 @@ var populatePlayer = function(player, currentGame, count) {
   });
   // event handler for rolling two dice
   $('.button__roll2').last().click(function() {
+    disableRollButtons($('.button__roll1'),$('.button__roll2'));
     var dieValue = currentGame.players[currentGame.activePlayerIndex].rollTwoDie();
     // update display of dice
     $(".die-pic1").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieOneImgAddress);
@@ -313,8 +314,6 @@ var populatePlayer = function(player, currentGame, count) {
     });
     currentGame.players[currentGame.activePlayerIndex].getGreenPayout(dieValue);
   });
-  // event handler for roll one dice button
-  //run check on all players for payouts
   //run function to update purse UIs
   // event handler for roll two dice button
   //run check on all players for payouts
@@ -394,6 +393,9 @@ $(document).ready(function() {
       populatePlayer(player, currentGame, count);
       count++;
     });
+    $('button').prop("disabled", true);
+    $('#player0 button').prop("disabled", false);
+    $('#player0').css("background-color", "#52A5D8");
   });
   // $('#startGameButton').click(function() {
   //   hideAndShowDivs(".player_page", ".rule_link");
