@@ -1,11 +1,26 @@
+/*index intro screen*/
 #startGameButton {
   display: none;
 }
-
+/*index main game*/
 .main_game_div {
+  display: none;
+  margin-top: 10%;
+}
+.rule_link {
+  float: right;
   display: none;
 }
 
+/*scripts append main game */
+.player {
+  padding-left: 2%;
+}
+.player, .card {
+  border: solid black 1px;
+  border-radius: 3px;
+}
+/*player creation page*/
 .player_page {
   display: none;
 }
@@ -17,13 +32,9 @@
 }
 .player_rules h2 {
   text-decoration: underline;
-
-}
-.player, .card {
-  border: solid black 1px;
-  border-radius: 3px;
 }
 
+/*populate card JS*/
 .js__not-owned {
   opacity: .25;
 }
