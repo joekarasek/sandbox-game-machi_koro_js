@@ -358,7 +358,7 @@ $(document).ready(function() {
   $('form#playerSetup input').focus();
 
   $('.intro_screen').click(function() {
-    hideAndShowDivs('.intro_screen','.player_creation');
+    hideAndShowDivs('.intro_screen','.player_page');
   });
 
   $('form#playerSetup').submit(function(event) {
@@ -368,11 +368,14 @@ $(document).ready(function() {
   });
 
   $('#startGameButton').click(function() {
-    hideAndShowDivs(".player_creation", ".main_game_div");
+    hideAndShowDivs(".player_page", ".main_game_div");
     console.log(currentGame);
     currentGame.players.forEach(function(player) {
       populatePlayer(player, currentGame);
     });
+  });
+  $('#startGameButton').click(function() {
+    hideAndShowDivs(".player_page", ".rule_link");
   });
 
   // event handler for click on bank card, will remove from bank and add to player, update UI, if player can afford it, end turn if successful

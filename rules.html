@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Project Title</title>
+    <title>Machi Koro Rules</title>
 
   	<!-- jquery-2.2.0 -->
   	<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
@@ -13,27 +13,16 @@
   	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
   	<!-- my css and js -->
-  	<link rel="stylesheet" href="css/styles.css">
+  	<link rel="stylesheet" href="css/rules.css">
   	<script type="text/javascript" src="js/scripts.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Unkempt:400,700' rel='stylesheet' type='text/css'>
   </head>
+
   <body>
-    <!-- intro screen -->
-    <div class="intro_screen">
-      <h1>Welcome to Machi Koro!</h1>
-      <!-- section on the rules -->
-      <button id="exitIntroButton">Start Game</button>
-    </div>
-    <!-- playercreation form -->
-    <div class="player_creation">
-      <h2>Setup the game's players...</h2>
-      <form action="submit" id="playerSetup">
-        <label>Player's Name: </label><input type="text">
-        <button type="submit">Add Player to Game</button>
-      </form>
-      <h3>Players added:</h3>
-      <ul id="playerList"></ul>
-      <button id="startGameButton" type="button">Start Game</button>
+    <div class="container">
+      <div class="header_img">
+        <img src="img/machi-koro.jpg" alt="machi koro" />
+      </div>
       <div class="player_rules">
         <div class="well">
           <h2>Machi Koro Rules</h2>
@@ -65,25 +54,6 @@
         <div class="well">
           <p>Game End: The player to construct all four of their Landmarks first wins the game!</p>
         </div>
-      </div>
-    </div>
-
-    <div class="game__board">
-      <div class="main_page_header">
-        <p class="rule_link"><a href="rules.html" target="_blank">Game Rules</a></p>
-      </div>
-      <!-- dice visuals -->
-      <h2>Dice</h2>
-      <div class="row die-pics">
-        <div class="col-xs-6">
-          <img class='die-pic1' src='img/5.png' alt="picture of die face">
-        </div>
-        <div class="col-xs-6">
-          <img class='die-pic2' src='img/4.png' alt="picture of die face">
-        </div>
-      </div>
-      <div class="main_game_div game__players">
-
       </div>
     </div>
   </body>
