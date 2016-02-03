@@ -18,3 +18,22 @@
 .js__not-owned {
   opacity: .25;
 }
+
+h2 {
+  font-size: 20px;
+}
+
+.card__row img {
+  width: 50px;
+}
+
+.card__row div {
+  text-align: center;
+}
+@media (min-width: 760px) {
+  .card__row img {
+    width: 100px;
+  }
+
+
+}
