@@ -4,8 +4,41 @@
 
 .main_game_div {
   display: none;
+
 }
 
 .player_creation {
   display: none;
+}
+
+
+.intro_screen {
+  margin-top: 25px;
+  text-align: center;
+  font-family: nanum brush script;
+  color: #00ACDC;
+}
+
+.intro_screen h1 {
+  font-size: 70px;
+  font-weight: bold;
+}
+
+.intro_screen .btn {
+  background: #fff;
+  color: #00ACDC;
+  padding: 20px;
+  font-size: 40px;
+  border-radius: 50%;
+}
+
+#rules {
+  padding: 20px;
+  font-size: 30px;
+}
+
+.footer {
+  background-color: #00ACDC;
+  height: 45px;
+  margin-top: 25px;
 }
