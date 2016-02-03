@@ -44,8 +44,8 @@ Dice.prototype.roll = function() {
 function Player(playerName) {
   this.playerName = playerName;
   this.cardStack = [
-    new Card([1], "Wheat Field", "blue", 1, "wheat", 1, 0, "img/wheat1.jpg"),
-    new Card([2,3], "Bakery", "green", 1, "store", 1, 0, "img/bakery2-3.jpg")
+    new Card([1], "Wheat Field", "blue", 1, "wheat", 1, '', "img/wheat1.jpg"),
+    new Card([2,3], "Bakery", "green", 1, "store", 1, '', "img/bakery2-3.jpg")
     ];
   this.purse = 3;
   this.landmarks = [
@@ -87,12 +87,12 @@ Player.prototype.getBluePayout = function(diceValue) {
   this.purse += payOut;
 }
 Player.prototype.getGreenPayout = function(diceValue) {
+  console.log("getGreenPayout triggered!");
   var payOut = 0;
-  var isTurn = this.isTurn;
   var thisPlayer = this;
   var multiplier = 0;
   this.cardStack.forEach(function(card) {
-    if (card.cardMultiplier !== undefined && card.cardKey.indexOf(diceValue) !== -1) {
+    if (card.cardMultiplier !== '' && card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "green") {
       thisPlayer.cardStack.forEach(function(card2) {
         if (card.cardMultiplier === card2.cardType) {
           multiplier++;
@@ -100,7 +100,7 @@ Player.prototype.getGreenPayout = function(diceValue) {
       });
       payOut += (multiplier * card.cardPayout);
       multiplier = 0;
-    } else if (card.cardKey.indexOf(diceValue) !== -1 && isTurn === true) {
+    } else if (card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "green") {
       payOut += card.cardPayout;
     }
   });
@@ -268,26 +268,36 @@ var populatePlayer = function(player, currentGame) {
     '</div>'
   );
   populatePlayerCards();
-  $('.button__roll1').click(function() {
+  $('.button__roll1').last().click(function() {
     currentGame.players[currentGame.activePlayerIndex].rollOneDie();
-    // update display of scores
+    // update display of dice
     $(".die-pic1").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieOneImgAddress);
-    //change this line to make the second dice clear
     $(".die-pic2").css("opacity", "0.2");
     // disable further rolls
-    disableRollButtons($('.button__roll1'),$('.button__roll2'));
+    // disableRollButtons($('.button__roll1'),$('.button__roll2'));
     // run payouts
+    var dieValue = currentGame.players[currentGame.activePlayerIndex].dice.dieOne;
+    currentGame.players[currentGame.activePlayerIndex].getGreenPayout(dieValue);
+    currentGame.players.forEach(function(playerToPayout) {
+      playerToPayout.getBluePayout(dieValue);
+    });
+    // console.log(currentGame.players[currentGame.activePlayerIndex].purse);
+
   });
-  $('.button__roll2').click(function() {
-    currentGame.players[currentGame.activePlayerIndex].rollTwoDie();
-    // update display of scores
+  $('.button__roll2').last().click(function() {
+    var dieValue = currentGame.players[currentGame.activePlayerIndex].rollTwoDie();
+    // update display of dice
     $(".die-pic1").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieOneImgAddress);
-    //change this line to make the second dice clear
     $(".die-pic2").css("opacity", "1");
     $(".die-pic2").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieTwoImgAddress);
     // disable further rolls
-    disableRollButtons($('.button__roll1'),$('.button__roll2'));
+    // disableRollButtons($('.button__roll1'),$('.button__roll2'));
     // run payouts
+    currentGame.players.forEach(function(player) {
+      player.getBluePayout(dieValue);
+    });
+    currentGame.players[currentGame.activePlayerIndex].getGreenPayout(dieValue);
+    console.log(currentGame.players[currentGame.activePlayerIndex].purse);
   });
   // event handler for roll one dice button
   //run check on all players for payouts
@@ -333,7 +343,6 @@ var populatePlayerCards = function() {
                             '</div>'
     );
   });
-
 }
 
 // populate a player div
@@ -373,5 +382,4 @@ $(document).ready(function() {
 
   //event handler for purchasing landmark, ends turn
       //include a check for winner
-
 });
