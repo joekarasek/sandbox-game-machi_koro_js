@@ -3,40 +3,37 @@
 # This version is far from complete. Come back Later please!!
 
 
-#### _{Brief description of application}, {Date of current version}_
+#### _Machi Koro is a card game., February 4, 2016 _
 
-#### By _**{List of contributors}**_
+#### By _**Blair Peterson, Joseph Karasek, Kyle Derrick, Mao Thygesen**_
 
 ## Description
 
-_{This is a detailed description of your application. Its purpose and usage.  Give as much detail as needed to explain what the application does, and any other information you want users or other developers to have. }_
+_Machi Koro is a fast-paced game for 2-4 players. Each player wants to develop the city on his own terms in order to complete all of the landmarks under construction faster than his rivals. On his turn, each player rolls one or two dice. If the sum of the dice rolled matches the number of a building that a player owns, he gets the effect of that building; in some cases opponents will also benefit from your die (just as you can benefit from theirs). Then, with money in hand a player can build a landmark or a new building, ideally adding to the wealth of his city on future turns. The first player to construct all of his landmarks wins!_
 
 ## Setup/Installation Requirements
 
-* _This is a great place_
-* _to list setup instructions_
-* _in a simple_
-* _easy-to-understand_
-* _format_
+* _Get the repository from GitHub_
+* _Clone it. _
+* _Open index.html in your browser._
 
-_{Leave nothing to chance! You want it to be easy for potential users, employers and collaborators to run your app. Do I need to run a server? How should I set up my databases? Is there other code this app depends on?}_
 
 ## Known Bugs
 
-_{Are there issues that have not yet been resolved that you want to let users know you know?  Outline any issues that would impact use of your application.  Share any workarounds that are in place. }_
+_It doesn't fully work yet._
 
 Current version has a patch to handle the "factory" type of card, the Fruit and Vegetable Market is marked as a factory type, wrongly, to make the patch work.
 
 ## Support and contact details
 
-_{Let people know what to do if they run into any issues or have questions, ideas or concerns.  Encourage them to contact you or make a contribution to the code.}_
+_Contact us through GitHub._
 
 ## Technologies Used
 
-_{Tell me about the languages and tools you used to create this app. Assume that I know you probably used HTML and CSS. If you did something really cool using only HTML, point that out.}_
+_JavaScript, jQuery, Mocha, Chai, Bootstrap_
 
 ### License
 
 MIT License.
 
-Copyright (c) 2016 **_{List of contributors or company name}_**
+Copyright (c) 2016 **_Blair Peterson, Joseph Karasek, Kyle Derrick, Mao Thygesen_**
