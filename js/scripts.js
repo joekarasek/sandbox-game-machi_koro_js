@@ -393,6 +393,7 @@ $(document).ready(function() {
 
   $('#startGameButton').click(function() {
     hideAndShowDivs(".player_creation", ".game__board");
+    hideAndShowDivs(".player_page", ".rule_link");
     console.log(currentGame);
     var count = 0;
     currentGame.players.forEach(function(player) {
@@ -403,13 +404,9 @@ $(document).ready(function() {
     $('#player0 button').prop("disabled", false);
     $('#player0').css("background-color", "#52A5D8");
   });
-  $('#startGameButton').click(function() {
-    hideAndShowDivs(".player_page", ".rule_link");
-  });
 
   // event handler for click on bank card, will remove from bank and add to player, update UI, if player can afford it, end turn if successful
 
-  // event handler for button end turn without purchase
 
   //event handler for purchasing landmark, ends turn
       //include a check for winner
