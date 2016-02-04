@@ -399,6 +399,7 @@ $(document).ready(function() {
       populatePlayer(player, currentGame, count);
       count++;
     });
+    // currentGame.cardBank(currentGame);
     $('button').prop("disabled", true);
     $('.modalButtons').prop("disabled", false);
     $('#player0 button').prop("disabled", false);
@@ -407,6 +408,8 @@ $(document).ready(function() {
   $('#startGameButton').click(function() {
     hideAndShowDivs(".player_page", ".rule_link");
   });
+  });
+
 
   // event handler for click on bank card, will remove from bank and add to player, update UI, if player can afford it, end turn if successful
 
@@ -414,4 +417,3 @@ $(document).ready(function() {
 
   //event handler for purchasing landmark, ends turn
       //include a check for winner
-});
