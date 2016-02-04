@@ -20,7 +20,7 @@ function Card(cardKey, cardName, cardColor, cardPayout, cardType, cardCost, card
   this.cardPayout = cardPayout;
   this.cardType = cardType;
   this.cardCost = cardCost;
-  this.cardMultiplier = cardMultiplier; //is a string equal to cardType that multiplies
+  this.cardMultiplier = cardMultiplier; //is a string equal to cardType that multiplies in the case of factory
   this.cardURL = cardURL;
 }
 
@@ -54,20 +54,23 @@ function Player(playerName) {
     new Landmark("Amusement Park", 16),
     new Landmark("Radio Tower", 22)
     ];
-  this.isTurn = false;
-  this.dice = new Dice();
+
 }
-Player.prototype.rollOneDie = function() {
-  this.dice.roll();
-  return this.dice.dieOne;
-}
-Player.prototype.rollTwoDie = function() {
-  this.dice.roll();
-  return this.dice.dieOne + this.dice.dieTwo;
-}
+// Player.prototype.rollOneDie = function() {
+//   this.dice.roll();
+//   return this.dice.dieOne;
+// }
+// Player.prototype.rollTwoDie = function() {
+//   this.dice.roll();
+//   return this.dice.dieOne + this.dice.dieTwo;
+// }
 Player.prototype.addCard = function(card) {
-  this.purse -= card.cardCost;
-  this.cardStack.push(card);
+  if (this.purse-card.cardCost>=0) {
+    this.purse -= card.cardCost;
+    this.cardStack.push(card);
+    return true;
+  }
+  return false;
 }
 Player.prototype.landmarkTrue = function(landmark) {
   this.purse -= landmark.landmarkCost;
@@ -77,34 +80,34 @@ Player.prototype.landmarkTrue = function(landmark) {
     }
   });
 }
-Player.prototype.getBluePayout = function(diceValue) {
-  var payOut = 0;
-  this.cardStack.forEach(function(card) {
-    if (card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "blue") {
-      payOut += card.cardPayout;
-    }
-  });
-  this.purse += payOut;
-}
-Player.prototype.getGreenPayout = function(diceValue, currentGame) {
-  var payOut = 0;
-  var multiplier = 0;
-  var that = this;
-  this.cardStack.forEach(function(card) {
-    if (card.cardMultiplier !== '' && card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "green") {
-      that.cardStack.forEach(function(card2) {
-        if (card.cardMultiplier === card2.cardType) {
-          multiplier++;
-        }
-      });
-      payOut += (multiplier * card.cardPayout);
-      multiplier = 0;
-    } else if (card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "green") {
-      payOut += card.cardPayout;
-    }
-  });
-  currentGame.players[currentGame.activePlayerIndex].purse += payOut;
-}
+// Player.prototype.getBluePayout = function(diceValue) {
+//   var payOut = 0;
+//   this.cardStack.forEach(function(card) {
+//     if (card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "blue") {
+//       payOut += card.cardPayout;
+//     }
+//   });
+//   this.purse += payOut;
+// }
+// Player.prototype.getGreenPayout = function(diceValue, currentGame) {
+//   var payOut = 0;
+//   var multiplier = 0;
+//   var that = this;
+//   this.cardStack.forEach(function(card) {
+//     if (card.cardMultiplier !== '' && card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "green") {
+//       that.cardStack.forEach(function(card2) {
+//         if (card.cardMultiplier === card2.cardType) {
+//           multiplier++;
+//         }
+//       });
+//       payOut += (multiplier * card.cardPayout);
+//       multiplier = 0;
+//     } else if (card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "green") {
+//       payOut += card.cardPayout;
+//     }
+//   });
+//   currentGame.players[currentGame.activePlayerIndex].purse += payOut;
+// }
 Player.prototype.requestRedPayout = function(){
   var requestedAmount = 0;
   this.cardStack.forEach(function(card) {
@@ -187,6 +190,7 @@ function Game() {
   this.cardBank.setStandardBank();
   this.players = [];
   this.activePlayerIndex = 0;
+  this.dice = new Dice();
 }
 // method for adding players to game
 Game.prototype.addPlayer = function(playerToAdd) {
@@ -208,8 +212,43 @@ Game.prototype.canActivePlayerRollTwoDice = function() {
   }
   return false;
 }
-
-
+Game.prototype.rollOneDie = function() {
+  this.dice.roll();
+  return this.dice.dieOne;
+}
+Game.prototype.rollTwoDie = function() {
+  this.dice.roll();
+  return this.dice.dieOne + this.dice.dieTwo;
+}
+Game.prototype.giveBluePayout = function(diceValue) {
+  this.players.forEach(function(player) {
+    var payOut = 0;
+    player.cardStack.forEach(function(card) {
+      if (card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "blue") {
+        payOut += card.cardPayout;
+      }
+    });
+    player.purse += payOut;
+  });
+}
+Game.prototype.giveGreenPayout = function(diceValue) {
+  var payOut = 0;
+  var multiplier = 0;
+  this.players[this.activePlayerIndex].cardStack.forEach(function(card) {
+    if (card.cardMultiplier !== '' && card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "green") {
+      that.cardStack.forEach(function(card2) {
+        if (card.cardMultiplier === card2.cardType) {
+          multiplier++;
+        }
+      });
+      payOut += (multiplier * card.cardPayout);
+      multiplier = 0;
+    } else if (card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "green") {
+      payOut += card.cardPayout;
+    }
+  });
+  this.players[this.activePlayerIndex].purse += payOut;
+}
 // ===========================
 //     User Interface
 // ===========================
