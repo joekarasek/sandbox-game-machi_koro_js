@@ -369,6 +369,7 @@ var populatePlayerCards = function() {
 
 // populate a player div
 // show available/purchased cards
+// .setStandardBank();
 // hide unavailable cards
 // highlight active players div
 // update UI with players current purse value
@@ -402,9 +403,9 @@ $(document).ready(function() {
     $('#player0 button').prop("disabled", false);
     $('#player0').css("background-color", "#52A5D8");
   });
-  // $('#startGameButton').click(function() {
-  //   hideAndShowDivs(".player_page", ".rule_link");
-  // });
+  $('#startGameButton').click(function() {
+    hideAndShowDivs(".player_page", ".rule_link");
+  });
 
   // event handler for click on bank card, will remove from bank and add to player, update UI, if player can afford it, end turn if successful
 
