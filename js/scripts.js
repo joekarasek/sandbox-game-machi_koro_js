@@ -365,6 +365,8 @@ var populatePlayerCards = function() {
                             '</div>'
     );
   });
+  $('.player').last().find('.card_row').first().find('.card').first().find()
+
 }
 
 // populate a player div
