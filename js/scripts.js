@@ -365,7 +365,8 @@ var populatePlayerCards = function() {
                             '</div>'
     );
   });
-  $('.player').last().find('.card_row').first().find('.card').first().find()
+  $('.player').last().find(".js__not-owned").first().removeClass("js__not-owned");
+  $('.player').last().find(".js__not-owned").first().removeClass("js__not-owned");
 
 }
 
