@@ -346,6 +346,7 @@ var populatePlayerCards = function() {
 
 // populate a player div
 // show available/purchased cards
+// .setStandardBank();
 // hide unavailable cards
 // highlight active players div
 // update UI with players current purse value
