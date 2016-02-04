@@ -155,8 +155,6 @@ CardBank.prototype.removeCard = function(cardNameToRemove) {
   }
   return isPresent;
 }
-
-
 CardBank.prototype.setStandardBank = function() {
   var temp_arr = [
     new Card([1], "Wheat Field", "blue", 1, "wheat", 1, '', 'img/wheat1.jpg'),
@@ -172,12 +170,11 @@ CardBank.prototype.setStandardBank = function() {
     new Card([10], "Apple Orchard", "blue", 3, "wheat", 3, '', 'img/apple10.jpg'),
     new Card([11,12], "Fruit Market", "green", 2, "factory", 2, "wheat", 'img/fruit11-12.jpg')
   ];
-
   for (var i = 0; i < temp_arr.length; i++) {
-      var card = temp_arr[i];
-      for (var j = 6; j > 0; j--) {
-        this.cards.push(card);
-      }
+    var card = temp_arr[i];
+    for (var j = 6; j > 0; j--) {
+      this.cards.push(card);
+    }
   }
 }
 
@@ -211,7 +208,6 @@ Game.prototype.canActivePlayerRollTwoDice = function() {
   }
   return false;
 }
-// ??? method to determine who goes first
 
 
 // ===========================
@@ -281,6 +277,7 @@ var populatePlayer = function(player, currentGame, count) {
     $(newTarget).css("background-color", "#52A5D8");
     $(newTarget+" .button__end-turn").prop("disabled", false);
     enableRollButtons($(newTarget+" .button__roll1"), $(newTarget+" .button__roll2"));
+    // update purse display
   });
 
   // event handler for rolling one dice
@@ -297,7 +294,9 @@ var populatePlayer = function(player, currentGame, count) {
       playerToPayout.getBluePayout(dieValue);
     });
     disableRollButtons($('.button__roll1'),$('.button__roll2'));
+    updatePurseDisplays(currentGame);
   });
+
   // event handler for rolling two dice
   $('.button__roll2').last().click(function() {
     disableRollButtons($('.button__roll1'),$('.button__roll2'));
@@ -306,13 +305,12 @@ var populatePlayer = function(player, currentGame, count) {
     $(".die-pic1").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieOneImgAddress);
     $(".die-pic2").css("opacity", "1");
     $(".die-pic2").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieTwoImgAddress);
-    // disable further rolls
-    // disableRollButtons($('.button__roll1'),$('.button__roll2'));
     // run payouts
     currentGame.players.forEach(function(player) {
       player.getBluePayout(dieValue);
     });
     currentGame.players[currentGame.activePlayerIndex].getGreenPayout(dieValue, currentGame);
+    updatePurseDisplays(currentGame);
   });
   //run function to update purse UIs
   // event handler for roll two dice button
@@ -326,6 +324,13 @@ var disableRollButtons = function(button1, button2) {
 var enableRollButtons = function(button1, button2) {
   button1.prop('disabled', false);
   button2.prop('disabled', false);
+}
+var updatePurseDisplays = function(currentGame) {
+  var count = 0;
+  currentGame.players.forEach(function(player) {
+    $('#player'+count+' .player__coins').text("Coins: "+player.purse);
+    count++;
+  });
 }
 var populatePlayerCards = function() {
   // two arrays of card names for each row
