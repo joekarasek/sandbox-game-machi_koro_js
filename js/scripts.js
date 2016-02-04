@@ -236,6 +236,53 @@ var hideAndShowDivs = function(divToHide, divToShow) {
   $(divToHide).hide();
   $(divToShow).show();
 }
+// var updatePlayerCardCounts = function(currentGame) {
+//   var rowOneCardNames = [
+//     "Wheat Field",
+//     "Bakery",
+//     "Ranch",
+//     "Cafe",
+//     "Convenience Store",
+//     "Forest"
+//   ];
+//   var rowTwoCardNames = [
+//     "Cheese Factory",
+//     "Furniture Store",
+//     "Mine",
+//     "Family Restaurant",
+//     "Apple Orchard",
+//     "Fruit Market"
+//   ];
+//   var rowOneCardURLs = [
+//     "wheat1",
+//     "bakery2-3",
+//     "ranch2",
+//     "cafe3",
+//     "convenience4",
+//     "forest5"
+//   ];
+//   var rowTwoCardURLs = [
+//     "cheese7",
+//     "furniture8",
+//     "mine9",
+//     "family9-10",
+//     "apple10",
+//     "fruit11-12"
+//   ];
+//   // loops through all players
+//     rowOneCardNames.forEach(function(cardName) {
+//       // for each player, get a count of how many cards they have
+//       var count= 0;
+//       player.cardStack.forEach(function(card) {
+//         if (card.cardName === cardName) {
+//           count++;
+//         }
+//       });
+//       // insert that card count into the correct card div
+//       $('.player').last().find(".js__not-owned").first().removeClass("js__not-owned");
+//     });
+//
+// }
 var populatePlayer = function(player, currentGame, count) {
   $('.main_game_div').append('<div class="player" id="player'+
       count+
@@ -277,7 +324,6 @@ var populatePlayer = function(player, currentGame, count) {
     $(newTarget).css("background-color", "#52A5D8");
     $(newTarget+" .button__end-turn").prop("disabled", false);
     enableRollButtons($(newTarget+" .button__roll1"), $(newTarget+" .button__roll2"));
-    // update purse display
   });
 
   // event handler for rolling one dice
@@ -351,19 +397,39 @@ var populatePlayerCards = function() {
     "fruit11-12"
   ];
   // two 6 long loops to poputate each row
+  var count = 0;
   rowOneCardURLs.forEach(function(cardURL) {
-    $('.player').last().find('.card__row').first().append('<div class="col-xs-2 card">'+
+    if (count < 2) {
+      $('.player').last().find('.card__row').first().append('<div class="col-xs-2 card">'+
                               '<img class="js__not-owned" src="img/'+cardURL+'.jpg" alt="card'+ 'Image">'+
-                              '<p class="card__quantity">No Cards</p>'+
+                              '<p class="card__quantity" class="'+cardURL+'">One Card</p>'+
                             '</div>'
-    );
+      );
+    } else {
+      $('.player').last().find('.card__row').first().append('<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/'+cardURL+'.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity" class="'+cardURL+'">No Cards</p>'+
+                            '</div>'
+      );
+    }
+    count++;
   });
+  count = 0;
   rowTwoCardURLs.forEach(function(cardURL) {
-    $('.player').last().find('.card__row').last().append('<div class="col-xs-2 card">'+
+    if (count < 2) {
+      $('.player').last().find('.card__row').last().append('<div class="col-xs-2 card">'+
                               '<img class="js__not-owned" src="img/'+cardURL+'.jpg" alt="card'+ 'Image">'+
-                              '<p class="card__quantity">No Cards</p>'+
+                              '<p class="card__quantity" class="'+cardURL+'">One Card</p>'+
                             '</div>'
-    );
+      );
+    } else {
+      $('.player').last().find('.card__row').last().append('<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/'+cardURL+'.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity" class="'+cardURL+'">No Cards</p>'+
+                            '</div>'
+      );
+    }
+    count++;
   });
   $('.player').last().find(".js__not-owned").first().removeClass("js__not-owned");
   $('.player').last().find(".js__not-owned").first().removeClass("js__not-owned");
