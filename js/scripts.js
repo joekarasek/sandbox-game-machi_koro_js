@@ -400,6 +400,7 @@ $(document).ready(function() {
       count++;
     });
     $('button').prop("disabled", true);
+    $('.modalButtons').prop("disabled", false);
     $('#player0 button').prop("disabled", false);
     $('#player0').css("background-color", "#52A5D8");
   });
