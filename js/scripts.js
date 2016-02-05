@@ -44,8 +44,8 @@ Dice.prototype.roll = function() {
 function Player(playerName, playerID) {
   this.playerName = playerName;
   this.cardStack = [
-    // new Card([1], "Wheat Field", "blue", 1, "wheat", 1, '', "img/wheat1.jpg"),
-    // new Card([2,3], "Bakery", "green", 1, "store", 1, '', "img/bakery2-3.jpg")
+    new Card([1], "Wheat Field", "blue", 1, "wheat", 1, '', "img/wheat1.jpg"),
+    new Card([2,3], "Bakery", "green", 1, "store", 1, '', "img/bakery2-3.jpg")
     ];
   this.purse = 3;
   this.landmarks = [
