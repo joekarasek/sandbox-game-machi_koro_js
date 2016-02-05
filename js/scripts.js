@@ -185,7 +185,6 @@ function CardBank() {
 CardBank.prototype.emptyBank = function() {
   this.cards = [];
 }
-//Returns true and false if successful, and removes the card from the cardbank.cards array
 CardBank.prototype.removeCard = function(cardNameToRemove) {
   var isPresent = false;
   var loopIndex = 0;
@@ -340,14 +339,6 @@ var updatePurseDisplays = function(currentGame) {
     count++;
   });
 }
-// populate a player div
-// show available/purchased cards
-// .setStandardBank();
-// hide unavailable cards
-// highlight active players div
-// update UI with players current purse value
-// update UI card counts
-//UI function at end of game to reset everything
 
 
 $(document).ready(function() {
@@ -372,6 +363,7 @@ $(document).ready(function() {
     $('#rollTwoDie').prop("disabled", false);
     $('#confirm-purchase').prop("disabled", false);
     $('#player0').css("background-color", "#52A5D8");
+    $('#rollOneDie').focus();
   });
   $('#rollOneDie').click(function() {
     var diceValue = currentGame.rollOneDie();
@@ -384,6 +376,7 @@ $(document).ready(function() {
     $('#rollTwoDie').prop("disabled", true);
     $('#purchase-cards').prop("disabled", false);
     $('#end-turn').prop("disabled", false);
+    $('#purchase-cards').focus();
   });
   $('#rollTwoDie').click(function() {
     var diceValue = currentGame.rollTwoDie();
@@ -396,6 +389,7 @@ $(document).ready(function() {
     $('#rollTwoDie').prop("disabled", true);
     $('#purchase-cards').prop("disabled", false);
     $('#end-turn').prop("disabled", false);
+    $('#purchase-cards').focus();
   });
   $('#purchase').submit(function(event) {
     event.preventDefault();
@@ -437,9 +431,11 @@ $(document).ready(function() {
       populatePlayer(player);
     });
     updatePurseDisplays(currentGame);
+    $('input[name="cardRadios"]:checked').prop('checked', false);
+    $('#end-turn').focus();
   });
   $('#end-turn').click(function() {
-    if (currentGame.players[currentGame.activePlayerIndex].purse>100) {
+    if (currentGame.players[currentGame.activePlayerIndex].purse>50) {
       alert("Congradulations "+currentGame.players[currentGame.activePlayerIndex].playerName+". You've Won the Game!");
     }
     $('#player'+currentGame.activePlayerIndex).css("background-color", "white");
@@ -451,9 +447,6 @@ $(document).ready(function() {
     $('#purchase-cards').prop("disabled", true);
     $('#end-turn').prop("disabled", true);
     updatePurseDisplays(currentGame);
-    console.log(currentGame);
+    $('#rollOneDie').focus();
   });
-
-  //event handler for purchasing landmark, ends turn
-      //include a check for winner
 });
