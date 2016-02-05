@@ -428,6 +428,7 @@ $(document).ready(function() {
     }
     if (currentGame.players[currentGame.activePlayerIndex].addCard(card)) {
       $('#confirm-purchase').prop("disabled", true);
+      $('#myModal').modal('toggle');
     } else {
       alert('You cannot afford that card!');
     }
@@ -437,8 +438,10 @@ $(document).ready(function() {
     });
     updatePurseDisplays(currentGame);
   });
-  // event handler for click on bank card, will remove from bank and add to player, update UI, if player can afford it, end turn if successful
   $('#end-turn').click(function() {
+    if (currentGame.players[currentGame.activePlayerIndex].purse>100) {
+      alert("Congradulations "+currentGame.players[currentGame.activePlayerIndex].playerName+". You've Won the Game!");
+    }
     $('#player'+currentGame.activePlayerIndex).css("background-color", "white");
     currentGame.updateActivePlayerIndex();
     $('#player'+currentGame.activePlayerIndex).css("background-color", "#52A5D8");
