@@ -228,7 +228,14 @@ CardBank.prototype.setStandardBank = function() {
 
 // Game Constructor
 //=====================
-
+function Game() {
+  // Will contain players, cardBank, activePlayerIndex,
+  this.cardBank = new CardBank();
+  this.cardBank.setStandardBank();
+  this.players = [];
+  this.activePlayerIndex = 0;
+  this.dice = new Dice();
+}
 Game.prototype.addPlayer = function(playerName) {
   var playerToAdd = new Player(playerName, "player"+this.players.length);
   playerToAdd.assignPlayerNumber(this.players.length+1);
@@ -378,9 +385,10 @@ $(document).ready(function() {
   $('#end-turn').click(function() {
     $('#player'+currentGame.activePlayerIndex).css("background-color", "white");
     currentGame.updateActivePlayerIndex();
-    $('#player0'+currentGame.activePlayerIndex).css("background-color", "#52A5D8");
+    $('#player'+currentGame.activePlayerIndex).css("background-color", "#52A5D8");
     $('#rollOneDie').prop("disabled", false);
     $('#end-turn').prop("disabled", true);
+    console.log(currentGame);
   });
 
   //event handler for purchasing landmark, ends turn
