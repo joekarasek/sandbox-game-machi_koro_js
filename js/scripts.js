@@ -41,11 +41,11 @@ Dice.prototype.roll = function() {
 
 // Player Constructor
 //===================
-function Player(playerName) {
+function Player(playerName, playerID) {
   this.playerName = playerName;
   this.cardStack = [
-    new Card([1], "Wheat Field", "blue", 1, "wheat", 1, '', "img/wheat1.jpg"),
-    new Card([2,3], "Bakery", "green", 1, "store", 1, '', "img/bakery2-3.jpg")
+    // new Card([1], "Wheat Field", "blue", 1, "wheat", 1, '', "img/wheat1.jpg"),
+    // new Card([2,3], "Bakery", "green", 1, "store", 1, '', "img/bakery2-3.jpg")
     ];
   this.purse = 3;
   this.landmarks = [
@@ -54,16 +54,8 @@ function Player(playerName) {
     new Landmark("Amusement Park", 16),
     new Landmark("Radio Tower", 22)
     ];
-
+  this.playerID = playerID;
 }
-// Player.prototype.rollOneDie = function() {
-//   this.dice.roll();
-//   return this.dice.dieOne;
-// }
-// Player.prototype.rollTwoDie = function() {
-//   this.dice.roll();
-//   return this.dice.dieOne + this.dice.dieTwo;
-// }
 Player.prototype.addCard = function(card) {
   if (this.purse-card.cardCost>=0) {
     this.purse -= card.cardCost;
@@ -71,6 +63,15 @@ Player.prototype.addCard = function(card) {
     return true;
   }
   return false;
+}
+Player.prototype.returnNumberOwnedOfCard() = function(cardName) {
+  var counter=0;
+  this.cardStack.forEach(function(card){
+    if (card.cardName===cardName) {
+      counter++;
+    }
+  });
+  return counter;
 }
 Player.prototype.landmarkTrue = function(landmark) {
   this.purse -= landmark.landmarkCost;
@@ -80,34 +81,6 @@ Player.prototype.landmarkTrue = function(landmark) {
     }
   });
 }
-// Player.prototype.getBluePayout = function(diceValue) {
-//   var payOut = 0;
-//   this.cardStack.forEach(function(card) {
-//     if (card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "blue") {
-//       payOut += card.cardPayout;
-//     }
-//   });
-//   this.purse += payOut;
-// }
-// Player.prototype.getGreenPayout = function(diceValue, currentGame) {
-//   var payOut = 0;
-//   var multiplier = 0;
-//   var that = this;
-//   this.cardStack.forEach(function(card) {
-//     if (card.cardMultiplier !== '' && card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "green") {
-//       that.cardStack.forEach(function(card2) {
-//         if (card.cardMultiplier === card2.cardType) {
-//           multiplier++;
-//         }
-//       });
-//       payOut += (multiplier * card.cardPayout);
-//       multiplier = 0;
-//     } else if (card.cardKey.indexOf(diceValue) !== -1 && card.cardColor === "green") {
-//       payOut += card.cardPayout;
-//     }
-//   });
-//   currentGame.players[currentGame.activePlayerIndex].purse += payOut;
-// }
 Player.prototype.requestRedPayout = function(){
   var requestedAmount = 0;
   this.cardStack.forEach(function(card) {
@@ -132,6 +105,84 @@ Player.prototype.hasWon = function() {
   }
   return false;
 }
+Player.prototype.assignPlayerNumber = function(number) {
+  this.playerNumber = number;
+}
+Player.prototype.refreshUserDisplay = function() {
+  this.playerDisplay = '<div class="player" id="player'+this.playerNumber+'">'+
+                        '<div class="row player__info">'+
+                          '<div class="col-md-4">'+
+                            '<h2 class="player__name">'+this.playerName+'</h2>'+
+                          '</div>'+
+                          '<div class="col-md-4">'+
+                            '<h2 class="player__landmarks">Landmarks</h2>'+
+                          '</div>'+
+                          '<div class="col-md-4">'+
+                            '<h2 class="player__coins">Coins: '+this.purse+'</h2>'+
+                          '</div>'+
+                        '</div>'+
+                        '<div class="player__cards">'+
+                          '<div class="row card__row">'+
+                            '<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/wheat1.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity">'+this.returnNumberOwnedOfCard("Wheat Field")+'</p>'+
+                            '</div>'+
+                            '<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/bakery2-3.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity">'+this.returnNumberOwnedOfCard("Bakery")+'</p>'+
+                            '</div>'+
+                            '<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/ranch2.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity">'+this.returnNumberOwnedOfCard("Ranch")+'</p>'+
+                            '</div>'+
+                            '<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/cafe3.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity">'+this.returnNumberOwnedOfCard("Cafe")+'</p>'+
+                            '</div>'+
+                            '<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/convenience4.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity">'+this.returnNumberOwnedOfCard("Convenience Store")+'</p>'+
+                            '</div>'+
+                            '<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/forest5.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity">'+this.returnNumberOwnedOfCard("Forest")+'</p>'+
+                            '</div>'+
+                          '</div>'+
+                          '<div class="row card__row">'+
+                            '<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/cheese7.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity">'+this.returnNumberOwnedOfCard("Cheese Factory")+'</p>'+
+                            '</div>'+
+                            '<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/furniture8.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity">'+this.returnNumberOwnedOfCard("Furniture Factory")+'</p>'+
+                            '</div>'+
+                            '<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/mine9.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity">'+this.returnNumberOwnedOfCard("Mine")+'</p>'+
+                            '</div>'+
+                            '<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/family9-10.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity">'+this.returnNumberOwnedOfCard("Family Restaurant")+'</p>'+
+                            '</div>'+
+                            '<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/apple10.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity">'+this.returnNumberOwnedOfCard("Apple Orchard")+'</p>'+
+                            '</div>'+
+                            '<div class="col-xs-2 card">'+
+                              '<img class="js__not-owned" src="img/fruit11-12.jpg" alt="card'+ 'Image">'+
+                              '<p class="card__quantity">'+this.returnNumberOwnedOfCard("Fruit Market")+'</p>'+
+                            '</div>'+
+                          '</div>'+
+                        '</div>'+
+                        '<div class="player__buttons">'+
+                          '<button class="button__roll1 button__roll1--player'+this.playerNumber+'">Roll 1</button>'+
+                          '<button class="button__roll2 button__roll2--player'+this.playerNumber+'">Roll 2</button>'+
+                          '<button class="button__end-turn button__end-turn--player'+this.playerNumber+'">End Turn</button>'+
+                        '</div>'+
+                      '</div>';
+}
+
 
 // CardBank Constructor
 //=====================
@@ -159,7 +210,7 @@ CardBank.prototype.removeCard = function(cardNameToRemove) {
   return isPresent;
 }
 CardBank.prototype.setStandardBank = function() {
-  var temp_arr = [
+  var standardDeck = [
     new Card([1], "Wheat Field", "blue", 1, "wheat", 1, '', 'img/wheat1.jpg'),
     new Card([2,3], "Bakery", "green", 1, "store", 1, '', 'img/bakery2-3.jpg'),
     new Card([2], "Ranch", "blue", 1, "cow", 1, '', 'img/ranch2.jpg'),
@@ -173,8 +224,8 @@ CardBank.prototype.setStandardBank = function() {
     new Card([10], "Apple Orchard", "blue", 3, "wheat", 3, '', 'img/apple10.jpg'),
     new Card([11,12], "Fruit Market", "green", 2, "factory", 2, "wheat", 'img/fruit11-12.jpg')
   ];
-  for (var i = 0; i < temp_arr.length; i++) {
-    var card = temp_arr[i];
+  for (var i = 0; i < standardDeck.length; i++) {
+    var card = standardDeck[i];
     for (var j = 6; j > 0; j--) {
       this.cards.push(card);
     }
@@ -193,7 +244,9 @@ function Game() {
   this.dice = new Dice();
 }
 // method for adding players to game
-Game.prototype.addPlayer = function(playerToAdd) {
+Game.prototype.addPlayer = function(playerName) {
+  var playerToAdd = new Player(playerName, "player"+this.players.length);
+  playerToAdd.assignPlayerNumber(this.players.length+1);
   this.players.push(playerToAdd);
 }
 // next turn method
@@ -261,7 +314,7 @@ var addNewPlayerToGame = function(game) {
     alert("This game is shitty with more than 4 people.");
     return;
   }
-  var newPlayer = new Player( $('form#playerSetup input').val());
+  var newPlayer = $('form#playerSetup input').val();
   game.addPlayer(newPlayer);
   $('#playerList').append('<li>'+$('form#playerSetup input').val()+'</li>');
   $('form#playerSetup input').val('');
@@ -276,34 +329,7 @@ var hideAndShowDivs = function(divToHide, divToShow) {
   $(divToShow).show();
 }
 var populatePlayer = function(player, currentGame, count) {
-  $('.main_game_div').append('<div class="player" id="player'+
-      count+
-      '">'+
-      '<div class="row player__info">'+
-        '<div class="col-md-4">'+
-          '<h2 class="player__name">'+player.playerName+'</h2>'+
-        '</div>'+
-        '<div class="col-md-4">'+
-          '<h2 class="player__landmarks">Landmarks</h2>'+
-        '</div>'+
-        '<div class="col-md-4">'+
-          '<h2 class="player__coins">Coins: '+player.purse+'</h2>'+
-        '</div>'+
-      '</div>'+
-      '<div class="player__cards">'+
-        '<div class="row card__row">'+
-        '</div>'+
-        '<div class="row card__row">'+
-        '</div>'+
-      '</div>'+
-      '<div class="player__buttons">'+
-        '<button class="button__roll1">Roll 1</button>'+
-        '<button class="button__roll2">Roll 2</button>'+
-        '<button class="button__end-turn">End Turn</button>'+
-      '</div>'+
-    '</div>'
-  );
-  populatePlayerCards();
+  $('.main_game_div').append(
 
   // event handler for end turn button
   $('.button__end-turn').last().click(function() {
@@ -371,41 +397,6 @@ var updatePurseDisplays = function(currentGame) {
     count++;
   });
 }
-var populatePlayerCards = function() {
-  // two arrays of card names for each row
-  var rowOneCardURLs = [
-    "wheat1",
-    "bakery2-3",
-    "ranch2",
-    "cafe3",
-    "convenience4",
-    "forest5"
-  ];
-  var rowTwoCardURLs = [
-    "cheese7",
-    "furniture8",
-    "mine9",
-    "family9-10",
-    "apple10",
-    "fruit11-12"
-  ];
-  // two 6 long loops to poputate each row
-  rowOneCardURLs.forEach(function(cardURL) {
-    $('.player').last().find('.card__row').first().append('<div class="col-xs-2 card">'+
-                              '<img class="js__not-owned" src="img/'+cardURL+'.jpg" alt="card'+ 'Image">'+
-                              '<p class="card__quantity">No Cards</p>'+
-                            '</div>'
-    );
-  });
-  rowTwoCardURLs.forEach(function(cardURL) {
-    $('.player').last().find('.card__row').last().append('<div class="col-xs-2 card">'+
-                              '<img class="js__not-owned" src="img/'+cardURL+'.jpg" alt="card'+ 'Image">'+
-                              '<p class="card__quantity">No Cards</p>'+
-                            '</div>'
-    );
-  });
-}
-
 // populate a player div
 // show available/purchased cards
 // .setStandardBank();
