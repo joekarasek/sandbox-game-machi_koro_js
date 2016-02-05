@@ -228,15 +228,7 @@ CardBank.prototype.setStandardBank = function() {
 
 // Game Constructor
 //=====================
-function Game() {
-  // Will contain players, cardBank, activePlayerIndex,
-  this.cardBank = new CardBank();
-  this.cardBank.setStandardBank();
-  this.players = [];
-  this.activePlayerIndex = 0;
-  this.dice = new Dice();
-}
-// method for adding players to game
+
 Game.prototype.addPlayer = function(playerName) {
   var playerToAdd = new Player(playerName, "player"+this.players.length);
   playerToAdd.assignPlayerNumber(this.players.length+1);
@@ -352,18 +344,14 @@ var updatePurseDisplays = function(currentGame) {
 
 $(document).ready(function() {
   var currentGame = new Game();
-  $('form#playerSetup input').focus();
-
   $('.intro_screen').click(function() {
     hideAndShowDivs('.intro_screen','.player_creation');
   });
-
   $('form#playerSetup').submit(function(event) {
     event.preventDefault();
     var playerToAdd = addNewPlayerToGame(currentGame);
     // run populate player function, pass in playerToAdd
   });
-
   $('#startGameButton').click(function() {
     hideAndShowDivs(".player_creation", ".game__board");
     hideAndShowDivs(".player_page", ".rule_link");
@@ -375,7 +363,6 @@ $(document).ready(function() {
     $('#rollOneDie').prop("disabled", false);
     $('#player0').css("background-color", "#52A5D8");
   });
-
   $('#rollOneDie').click(function() {
     var diceValue = currentGame.rollOneDie();
     currentGame.giveBluePayout(diceValue);
@@ -383,9 +370,18 @@ $(document).ready(function() {
     $('.die-pic1').prop("src", currentGame.dice.dieOneImgAddress);
     $('.die-pic2').prop("src", "img/0.png");
     updatePurseDisplays(currentGame);
+    $('#rollOneDie').prop("disabled", true);
+    $('#end-turn').prop("disabled", false);
   });
-  // event handler for click on bank card, will remove from bank and add to player, update UI, if player can afford it, end turn if successful
 
+  // event handler for click on bank card, will remove from bank and add to player, update UI, if player can afford it, end turn if successful
+  $('#end-turn').click(function() {
+    $('#player'+currentGame.activePlayerIndex).css("background-color", "white");
+    currentGame.updateActivePlayerIndex();
+    $('#player0'+currentGame.activePlayerIndex).css("background-color", "#52A5D8");
+    $('#rollOneDie').prop("disabled", false);
+    $('#end-turn').prop("disabled", true);
+  });
 
   //event handler for purchasing landmark, ends turn
       //include a check for winner
