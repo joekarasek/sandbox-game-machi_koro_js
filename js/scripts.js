@@ -185,7 +185,7 @@ function CardBank() {
 CardBank.prototype.emptyBank = function() {
   this.cards = [];
 }
-      //Returns true and false if successful, and removes the card from the cardbank.cards array
+//Returns true and false if successful, and removes the card from the cardbank.cards array
 CardBank.prototype.removeCard = function(cardNameToRemove) {
   var isPresent = false;
   var loopIndex = 0;
@@ -241,7 +241,6 @@ Game.prototype.addPlayer = function(playerName) {
   playerToAdd.assignPlayerNumber(this.players.length+1);
   this.players.push(playerToAdd);
 }
-// next turn method
 Game.prototype.updateActivePlayerIndex = function() {
   // this.players[this.activePlayerIndex].isTurn = false;
   if (this.activePlayerIndex < this.players.length-1) {
@@ -294,6 +293,8 @@ Game.prototype.giveGreenPayout = function(diceValue) {
   });
   this.players[this.activePlayerIndex].purse += payOut;
 }
+
+
 // ===========================
 //     User Interface
 // ===========================
@@ -368,6 +369,7 @@ $(document).ready(function() {
     });
     $('button').prop("disabled", true);
     $('#rollOneDie').prop("disabled", false);
+    $('#rollTwoDie').prop("disabled", false);
     $('#confirm-purchase').prop("disabled", false);
     $('#player0').css("background-color", "#52A5D8");
   });
@@ -379,6 +381,19 @@ $(document).ready(function() {
     $('.die-pic2').prop("src", "img/0.png");
     updatePurseDisplays(currentGame);
     $('#rollOneDie').prop("disabled", true);
+    $('#rollTwoDie').prop("disabled", true);
+    $('#purchase-cards').prop("disabled", false);
+    $('#end-turn').prop("disabled", false);
+  });
+  $('#rollTwoDie').click(function() {
+    var diceValue = currentGame.rollTwoDie();
+    currentGame.giveBluePayout(diceValue);
+    currentGame.giveGreenPayout(diceValue);
+    $('.die-pic1').prop("src", currentGame.dice.dieOneImgAddress);
+    $('.die-pic2').prop("src", currentGame.dice.dieTwoImgAddress);
+    updatePurseDisplays(currentGame);
+    $('#rollOneDie').prop("disabled", true);
+    $('#rollTwoDie').prop("disabled", true);
     $('#purchase-cards').prop("disabled", false);
     $('#end-turn').prop("disabled", false);
   });
@@ -428,6 +443,7 @@ $(document).ready(function() {
     currentGame.updateActivePlayerIndex();
     $('#player'+currentGame.activePlayerIndex).css("background-color", "#52A5D8");
     $('#rollOneDie').prop("disabled", false);
+    $('#rollTwoDie').prop("disabled", false);
     $('#confirm-purchase').prop("disabled", false);
     $('#purchase-cards').prop("disabled", true);
     $('#end-turn').prop("disabled", true);
