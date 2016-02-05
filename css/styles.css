@@ -77,9 +77,9 @@ h1, h2, h3, #exitIntroButton {
   color: #003d66;
 }
 /*populate card JS*/
-.js__not-owned {
+/*.js__not-owned {
   opacity: .25;
-}
+}*/
 
 h2 {
   font-size: 20px;

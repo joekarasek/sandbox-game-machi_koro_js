@@ -64,7 +64,7 @@ Player.prototype.addCard = function(card) {
   }
   return false;
 }
-Player.prototype.returnNumberOwnedOfCard() = function(cardName) {
+Player.prototype.returnNumberOwnedOfCard = function(cardName) {
   var counter=0;
   this.cardStack.forEach(function(card){
     if (card.cardName===cardName) {
@@ -109,8 +109,7 @@ Player.prototype.assignPlayerNumber = function(number) {
   this.playerNumber = number;
 }
 Player.prototype.refreshUserDisplay = function() {
-  this.playerDisplay = '<div class="player" id="player'+this.playerNumber+'">'+
-                        '<div class="row player__info">'+
+  this.playerDisplay = '<div class="row player__info">'+
                           '<div class="col-md-4">'+
                             '<h2 class="player__name">'+this.playerName+'</h2>'+
                           '</div>'+
@@ -174,13 +173,7 @@ Player.prototype.refreshUserDisplay = function() {
                               '<p class="card__quantity">'+this.returnNumberOwnedOfCard("Fruit Market")+'</p>'+
                             '</div>'+
                           '</div>'+
-                        '</div>'+
-                        '<div class="player__buttons">'+
-                          '<button class="button__roll1 button__roll1--player'+this.playerNumber+'">Roll 1</button>'+
-                          '<button class="button__roll2 button__roll2--player'+this.playerNumber+'">Roll 2</button>'+
-                          '<button class="button__end-turn button__end-turn--player'+this.playerNumber+'">End Turn</button>'+
-                        '</div>'+
-                      '</div>';
+                        '</div>';
 }
 
 
@@ -328,59 +321,9 @@ var hideAndShowDivs = function(divToHide, divToShow) {
   $(divToHide).hide();
   $(divToShow).show();
 }
-var populatePlayer = function(player, currentGame, count) {
-  $('.main_game_div').append(
-
-  // event handler for end turn button
-  $('.button__end-turn').last().click(function() {
-    disableRollButtons($('.button__roll1'),$('.button__roll2'));
-    var oldTarget = "#player"+currentGame.activePlayerIndex;
-    $(oldTarget).css("background-color", "white");
-    $(oldTarget+" .button__end-turn").prop("disabled", true);
-    currentGame.updateActivePlayerIndex();
-    var newTarget = "#player"+currentGame.activePlayerIndex;
-    $(newTarget).css("background-color", "#52A5D8");
-    $(newTarget+" .button__end-turn").prop("disabled", false);
-    enableRollButtons($(newTarget+" .button__roll1"), $(newTarget+" .button__roll2"));
-    // update purse display
-  });
-
-  // event handler for rolling one dice
-  $('.button__roll1').last().click(function() {
-    currentGame.players[currentGame.activePlayerIndex].rollOneDie();
-    // update display of dice
-    $(".die-pic1").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieOneImgAddress);
-    $(".die-pic2").css("opacity", "0.2");
-    // disable further rolls
-    // run payouts
-    var dieValue = currentGame.players[currentGame.activePlayerIndex].dice.dieOne;
-    currentGame.players[currentGame.activePlayerIndex].getGreenPayout(dieValue, currentGame);
-    currentGame.players.forEach(function(playerToPayout) {
-      playerToPayout.getBluePayout(dieValue);
-    });
-    disableRollButtons($('.button__roll1'),$('.button__roll2'));
-    updatePurseDisplays(currentGame);
-  });
-
-  // event handler for rolling two dice
-  $('.button__roll2').last().click(function() {
-    disableRollButtons($('.button__roll1'),$('.button__roll2'));
-    var dieValue = currentGame.players[currentGame.activePlayerIndex].rollTwoDie();
-    // update display of dice
-    $(".die-pic1").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieOneImgAddress);
-    $(".die-pic2").css("opacity", "1");
-    $(".die-pic2").attr("src", currentGame.players[currentGame.activePlayerIndex].dice.dieTwoImgAddress);
-    // run payouts
-    currentGame.players.forEach(function(player) {
-      player.getBluePayout(dieValue);
-    });
-    currentGame.players[currentGame.activePlayerIndex].getGreenPayout(dieValue, currentGame);
-    updatePurseDisplays(currentGame);
-  });
-  //run function to update purse UIs
-  // event handler for roll two dice button
-  //run check on all players for payouts
-  //run function to update purse UIs
+var populatePlayer = function(player) {
+  player.refreshUserDisplay();
+  $('#'+player.playerID).append(player.playerDisplay);
 }
 var disableRollButtons = function(button1, button2) {
   button1.prop('disabled', true);
@@ -425,10 +368,8 @@ $(document).ready(function() {
     hideAndShowDivs(".player_creation", ".game__board");
     hideAndShowDivs(".player_page", ".rule_link");
     console.log(currentGame);
-    var count = 0;
     currentGame.players.forEach(function(player) {
-      populatePlayer(player, currentGame, count);
-      count++;
+      populatePlayer(player);
     });
     $('button').prop("disabled", true);
     $('#player0 button').prop("disabled", false);
