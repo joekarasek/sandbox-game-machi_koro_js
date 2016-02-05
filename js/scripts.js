@@ -322,7 +322,7 @@ var hideAndShowDivs = function(divToHide, divToShow) {
 }
 var populatePlayer = function(player) {
   player.refreshUserDisplay();
-  $('#'+player.playerID).append(player.playerDisplay);
+  $('#'+player.playerID).empty().append(player.playerDisplay);
 }
 var disableRollButtons = function(button1, button2) {
   button1.prop('disabled', true);
@@ -368,6 +368,7 @@ $(document).ready(function() {
     });
     $('button').prop("disabled", true);
     $('#rollOneDie').prop("disabled", false);
+    $('#confirm-purchase').prop("disabled", false);
     $('#player0').css("background-color", "#52A5D8");
   });
   $('#rollOneDie').click(function() {
@@ -381,15 +382,56 @@ $(document).ready(function() {
     $('#purchase-cards').prop("disabled", false);
     $('#end-turn').prop("disabled", false);
   });
-
+  $('#purchase').submit(function(event) {
+    event.preventDefault();
+    var cardName = $('input[name="cardRadios"]:checked').val();
+    console.log(cardName);
+    if (cardName === "Wheat Field") {
+      var card = new Card([1], "Wheat Field", "blue", 1, "wheat", 1, '', 'img/wheat1.jpg');
+    } else if (cardName === "Bakery") {
+      var card = new Card([2,3], "Bakery", "green", 1, "store", 1, '', 'img/bakery2-3.jpg');
+    } else if (cardName === "Ranch") {
+      var card = new Card([2], "Ranch", "blue", 1, "cow", 1, '', 'img/ranch2.jpg');
+    } else if (cardName === "Cafe") {
+      var card = new Card([3], "Cafe", "red", 1, "cafe", 2, '', 'img/cafe3.jpg');
+    } else if (cardName === "Convenience Store") {
+      var card = new Card([4], "Convenience Store", "green", 3, "store", 2, '', 'img/convenience4.jpg');
+    } else if (cardName === "Forest") {
+      var card = new Card([5], "Forest", "blue", 1, "cog", 3, '', 'img/forest5.jpg');
+    } else if (cardName === "Cheese Factory") {
+      var card = new Card([7], "Cheese Factory", "green", 3, "factory", 5, "cow", 'img/cheese7.jpg');
+    } else if (cardName === "Furniture Factory") {
+      var card = new Card([8], "Furniture Factory", "green", 3, "factory", 3, "cog", 'img/furniture8.jpg');
+    } else if (cardName === "Mine") {
+      var card = new Card([9], "Mine", "blue", 5, "cog", 6, '', 'img/mine9.jpg');
+    } else if (cardName === "Family Restaurant") {
+      var card = new Card([9,10], "Family Restaurant", "red", 2, "cafe", 3, '', 'img/family9-10.jpg');
+    } else if (cardName === "Apple Orchard") {
+      var card = new Card([10], "Apple Orchard", "blue", 3, "wheat", 3, '', 'img/apple10.jpg');
+    } else if (cardName === "Fruit Market") {
+      var card = new Card([11,12], "Fruit Market", "green", 2, "factory", 2, "wheat", 'img/fruit11-12.jpg');
+    }
+    if (currentGame.players[currentGame.activePlayerIndex].addCard(card)) {
+      $('#confirm-purchase').prop("disabled", true);
+    } else {
+      alert('You cannot afford that card!');
+    }
+    $('#purchase-cards').prop("disabled", true);
+    currentGame.players.forEach(function(player) {
+      populatePlayer(player);
+    });
+    updatePurseDisplays(currentGame);
+  });
   // event handler for click on bank card, will remove from bank and add to player, update UI, if player can afford it, end turn if successful
   $('#end-turn').click(function() {
     $('#player'+currentGame.activePlayerIndex).css("background-color", "white");
     currentGame.updateActivePlayerIndex();
     $('#player'+currentGame.activePlayerIndex).css("background-color", "#52A5D8");
     $('#rollOneDie').prop("disabled", false);
+    $('#confirm-purchase').prop("disabled", false);
     $('#purchase-cards').prop("disabled", true);
     $('#end-turn').prop("disabled", true);
+    updatePurseDisplays(currentGame);
     console.log(currentGame);
   });
 

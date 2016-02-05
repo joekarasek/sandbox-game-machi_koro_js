@@ -24,14 +24,24 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            <h4 class="modal-title" id="myModalLabel">Purchase A Card</h4>
           </div>
           <div class="modal-body">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <form action="submit" id="purchase">
+              <lable><input name="cardRadios" type="radio" value="Wheat Field">Wheat Field</lable>
+              <lable><input name="cardRadios" type="radio" value="Bakery">Bakery</lable>
+              <lable><input name="cardRadios" type="radio" value="Ranch">Ranch</lable>
+              <lable><input name="cardRadios" type="radio" value="Cafe">Cafe</lable>
+              <lable><input name="cardRadios" type="radio" value="Convenience Store">Convenience Store</lable>
+              <lable><input name="cardRadios" type="radio" value="Forest">Forest</lable>
+              <lable><input name="cardRadios" type="radio" value="Cheese Factory">Cheese Factory</lable>
+              <lable><input name="cardRadios" type="radio" value="Furniture Factory">Furniture Factory</lable>
+              <lable><input name="cardRadios" type="radio" value="Mine">Mine</lable>
+              <lable><input name="cardRadios" type="radio" value="Apple Orchard">Apple Orchard</lable>
+              <lable><input name="cardRadios" type="radio" value="Family Restaurant">Family Restaurant</lable>
+              <lable><input name="cardRadios" type="radio" value="Fruit Market">Fruit Market</lable>
+              <button type="submit" id="confirm-purchase">Purchase</button>
+            </form>
           </div>
         </div>
       </div>
@@ -95,10 +105,10 @@
 
     <div class="row die-pics">
       <div class="col-xs-12">
-        <img class='die-pic1' src='img/5.png' alt="picture of die face">
+        <img class='die-pic1' src='img/0.png' alt="picture of die face">
       </div>
       <div class="col-xs-12">
-        <img class='die-pic2' src='img/4.png' alt="picture of die face">
+        <img class='die-pic2' src='img/0.png' alt="picture of die face">
       </div>
       <div class="mainbuttons">
         <button id="rollOneDie">Roll One Die</button><br>
