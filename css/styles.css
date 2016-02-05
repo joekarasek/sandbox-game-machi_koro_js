@@ -81,6 +81,9 @@ h1, h2, h3, #exitIntroButton {
   opacity: .25;
 }*/
 
+.js__not-rolled {
+  opacity: .1;
+}
 h2 {
   font-size: 20px;
 }
@@ -96,7 +99,9 @@ h2 {
 button[disabled] {
   opacity: 0.1;
 }
-
+.mainbuttons {
+  margin-left: 20px;
+}
 /*@media (min-width: 760px) {
   .card__row img {
     width: 100px;

@@ -372,10 +372,18 @@ $(document).ready(function() {
       populatePlayer(player);
     });
     $('button').prop("disabled", true);
-    $('#player0 button').prop("disabled", false);
+    $('#rollOneDie').prop("disabled", false);
     $('#player0').css("background-color", "#52A5D8");
   });
 
+  $('#rollOneDie').click(function() {
+    var diceValue = currentGame.rollOneDie();
+    currentGame.giveBluePayout(diceValue);
+    currentGame.giveGreenPayout(diceValue);
+    $('.die-pic1').prop("src", currentGame.dice.dieOneImgAddress);
+    $('.die-pic2').prop("src", "img/0.png");
+    updatePurseDisplays(currentGame);
+  });
   // event handler for click on bank card, will remove from bank and add to player, update UI, if player can afford it, end turn if successful
 
 
