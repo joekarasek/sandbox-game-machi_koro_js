@@ -378,6 +378,7 @@ $(document).ready(function() {
     $('.die-pic2').prop("src", "img/0.png");
     updatePurseDisplays(currentGame);
     $('#rollOneDie').prop("disabled", true);
+    $('#purchase-cards').prop("disabled", false);
     $('#end-turn').prop("disabled", false);
   });
 
@@ -387,6 +388,7 @@ $(document).ready(function() {
     currentGame.updateActivePlayerIndex();
     $('#player'+currentGame.activePlayerIndex).css("background-color", "#52A5D8");
     $('#rollOneDie').prop("disabled", false);
+    $('#purchase-cards').prop("disabled", true);
     $('#end-turn').prop("disabled", true);
     console.log(currentGame);
   });
